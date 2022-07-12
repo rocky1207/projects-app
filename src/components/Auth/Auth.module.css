@@ -1,6 +1,55 @@
-.red {
-    border: 1px solid red;
+.authSection {
+    background-image: url('../../assets/icons/authBg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    /*width: 100%;*/
+    height: 100vh;
+    width: 100%;
+    color: white;
 }
-.bla {
-    border: 1px solid blue;
+form {
+    width: 200px;
+    margin: 0 auto;
+    padding: 30vh 0;
+}
+.authInput {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid white;
+    background: none;
+    margin-bottom: 10px;
+    width: 200px;
+    outline: none;
+    color: white;
+}
+.uploadImageDiv {
+    border: 1px solid white;
+    width: 200px;
+    padding: 4px 8px;
+    margin: 10px auto;
+}
+
+input[type='file'] {
+    margin-bottom: 10px;
+    width: 100%;
+}
+input[type='file'] :hover {
+    cursor: pointer;
+}
+
+.submitRegisterForm {
+    /*border: 1px solid white;*/
+    width: 200px;
+    padding: 4px 8px;
+    margin: 20px 0;
+}
+.authLink {
+    color: red;
+}
+.authLink:hover {
+    opacity: 0.8;
+    text-decoration: none;
+    cursor: pointer;
 }

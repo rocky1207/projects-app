@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useEffect } from 'react';
 
 import { validateDatas } from './validateFunctions/validateDatas';
@@ -105,10 +105,11 @@ const Register = () => {
     }
 
     return (
-        <>
+        <section className={styles.authSection}>
             <form onSubmit={(e) => registerHandler(e)}>
                 <div>
                     <input
+                        className={styles.authInput}
                         value={username}
                         type="text"
                         placeholder="Username"
@@ -117,6 +118,7 @@ const Register = () => {
                 </div>
                 <div>
                     <input
+                        className={styles.authInput}
                         value={email}
                         type="email"
                         placeholder="E-mail"
@@ -125,6 +127,7 @@ const Register = () => {
                 </div>
                 <div>
                     <input
+                        className={styles.authInput}
                         value={password}
                         type="text"
                         placeholder="Password"
@@ -133,32 +136,40 @@ const Register = () => {
                 </div>
                 <div>
                     <input
+                        className={styles.authInput}
                         value={passwordConfirm}
                         type="text"
                         placeholder="Confirm password"
                         onChange={(e) => setPasswordConfirm(e.target.value)}
                     />
                 </div>
-                <div>
+                <div className={styles.uploadImageDiv}>
                     <input
                         type="file"
-                        placeholder="Upload image"
                         onChange={(e) => {
                             formData.append('files', e.target.files[0]);
                             setImage(formData);
                         }}
                     />
+                    Upload Your image
                 </div>
                 <div>
-                    <button type="submit" disabled={disabled}>
+                    <button
+                        className={styles.submitRegisterForm}
+                        type="submit"
+                        disabled={disabled}
+                    >
                         Submit
                     </button>
                 </div>
+                <p>
+                    Already registered?
+                    <Link to="/" className={styles.authLink}>
+                        Sign In
+                    </Link>
+                </p>
             </form>
-            <p>
-                Already registered?<Link to="/">Sign In</Link>
-            </p>
-        </>
+        </section>
     );
 };
 

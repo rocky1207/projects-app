@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ShowProjects from '../components/ShowProjects/ShowProjects';
-import ErrorPage from '../components/ErrorPage/ErrorPage';
+import MyProjects from '../pages/MyProjects/MyProjects';
+import ErrorPage from '../pages/ErrorPage/ErrorPage';
 
 const AppRoutes = () => {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<ShowProjects />} />
+                <Route path="/" element={<MyProjects />} />
                 <Route path="*" element={<ErrorPage />} />
             </Routes>
         </Router>
