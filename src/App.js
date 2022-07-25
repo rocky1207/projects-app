@@ -6,9 +6,9 @@ import './App.css';
 function App() {
     const state = useSelector((state) => state.auth);
 
-    const isLogged = state.isLogged;
+    const token = state.token;
     console.log(state);
-    return <>{isLogged ? <AppRoutes /> : <LoginRoutes />}</>;
+    return <>{token ? <AppRoutes /> : <LoginRoutes />}</>;
 }
 
 export default App;

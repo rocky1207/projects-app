@@ -14,6 +14,7 @@ const Register = () => {
     const navigate = useNavigate();
 
     const [register, { isLoading, isSuccess }] = useRegisterMutation();
+
     const [uploadImage, { data, isSuccess: uploadSuccess, isError, error }] =
         useUploadImageMutation();
 

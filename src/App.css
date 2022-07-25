@@ -7,4 +7,17 @@
 body {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
+    color: white;
+}
+.app {
+    overflow: hidden;
+    min-height: 100vh;
+    min-width: 100vw;
+    background: rgba(30, 30, 30, 0.9);
+}
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 }

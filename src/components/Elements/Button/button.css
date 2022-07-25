@@ -1,0 +1,16 @@
+.button {
+    border: none;
+    color: var(--white);
+    margin-top: 10px;
+    font-family: 'Roboto';
+    background-color: #59942b;
+    border-radius: 12px;
+    font-weight: 400;
+    outline: none;
+    height: 40px;
+    cursor: pointer;
+    width: 160px;
+}
+.button:hover {
+    background-color: var(--button-green);
+}

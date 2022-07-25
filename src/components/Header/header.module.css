@@ -1,0 +1,34 @@
+.header {
+    width: 90%;
+    margin: 0 auto 40px auto;
+}
+.header img {
+    height: 70px;
+    width: 70px;
+}
+.headerHead {
+    max-width: 240px;
+}
+.headerHead h2 {
+    font-size: 24px;
+}
+.headerHead p {
+    font-size: 16px;
+}
+.searchProjectsDiv {
+    margin: 10px 0 15px 0;
+}
+.searchProjectsDiv img {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px -13px 0;
+}
+.searchProjectsDiv input {
+    border: none;
+    border-bottom: 2px solid var(--white);
+    font-size: 14px;
+    font-weight: 100;
+    outline: none;
+    background: none;
+    line-height: 30px;
+}

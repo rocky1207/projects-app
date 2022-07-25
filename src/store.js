@@ -1,22 +1,50 @@
 import { configureStore } from '@reduxjs/toolkit';
-//import registerReducer from './features/registerUser/registerUserSlice';
-//import uploadReducer from './features/uplaodImage/uploadImageSlice';
-//import loginReducer from './features/loginUser/loginUserSlice';
 import authReducer from './features/auth/authSlice';
-//import roleReducer from './features/auth/userRoleSlice';
-//import { apiSlice } from './features/api/apiSlice';
+import searchReducer from './features/searchProjects/searchProjectsSlice';
 import { apiSlice } from './api/apiSlice';
+
+import {
+    persistStore,
+    persistReducer,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
+const persistConfig = {
+    key: 'root',
+    version: 1,
+    storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, authReducer);
 
 export const store = configureStore({
     reducer: {
-        // register: registerReducer,
-        auth: authReducer,
-        //upload: uploadReducer,
-        //login: loginReducer,
-        //role: roleReducer,
+        auth: persistedReducer,
+        search: searchReducer,
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
 
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(apiSlice.middleware),
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [
+                    FLUSH,
+                    REHYDRATE,
+                    PAUSE,
+                    PERSIST,
+                    PURGE,
+                    REGISTER,
+                ],
+            },
+        }).concat(apiSlice.middleware),
 });
+
+let Persistor = persistStore(store);
+
+export { Persistor };

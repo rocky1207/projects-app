@@ -1,0 +1,18 @@
+:root {
+    /* Colors */
+
+    --background-color: #e5e5e5;
+    --nav-background-color: #f0f0f0;
+    --lightGreenEmployee-background-color: #f5fde7;
+    --lightGreenMenager-background-color: #e7fdfd;
+    --white: #ffffff;
+    --black: #000000;
+    --button-green: #319795;
+    --text-secondary-color: #8d8d8d;
+    --grey-background-color: #dddddd;
+    --lightGreyTools-background-color: #f8f8f8;
+    --lightGreyHeader-background-color: #ede7fd;
+    --lightGreyUl-background-color: #eaeaea;
+    --text-primary-color: #8e8e8e;
+    --text-select-color: #2d3748;
+}
