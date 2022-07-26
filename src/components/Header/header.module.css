@@ -31,4 +31,5 @@
     outline: none;
     background: none;
     line-height: 30px;
+    color: var(--white);
 }

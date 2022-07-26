@@ -13,7 +13,7 @@ import { useEffect } from 'react';
 const ShowProjects = () => {
     const { currentUserId } = useSelector((state) => state.auth);
     const { filterParams } = useSelector((state) => state.search);
-    console.log(currentUserId);
+
     const { data: roleData } = useUserRoleQuery();
     const filterDatas = {
         filterParams,
@@ -24,6 +24,10 @@ const ShowProjects = () => {
     useEffect(() => {}, [filterParams]);
 
     const dispatch = useDispatch();
+
+    if (isLoading) {
+        return <h2>Loading...</h2>;
+    }
 
     if (isError) {
         console.log(error);
