@@ -8,16 +8,24 @@ body {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     color: white;
-}
-.app {
-    overflow: hidden;
     min-height: 100vh;
     min-width: 100vw;
     background: rgba(30, 30, 30, 0.9);
+    position: relative;
+}
+.app {
+    overflow: hidden;
 }
 .flex {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+}
+
+@media screen and (min-width: 1144px) {
+    .app {
+        max-width: 1144px;
+        margin: 0 auto;
+    }
 }

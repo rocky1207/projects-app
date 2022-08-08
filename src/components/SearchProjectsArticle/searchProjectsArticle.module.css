@@ -1,0 +1,61 @@
+.searchProjectsArticle {
+    max-width: 90%;
+    margin: 40px auto;
+}
+.searchProjectsArticle img {
+    height: 70px;
+    width: 70px;
+}
+.searchProjectsHeadDiv {
+    max-width: 300px;
+    flex-wrap: wrap;
+}
+
+.searchProjectsArticleHead {
+    max-width: 240px;
+}
+.searchProjectsArticleHead h2 {
+    font-size: 24px;
+}
+.searchProjectsArticleHead p {
+    font-size: 16px;
+}
+.searchProjectsDiv {
+    margin: 10px 0 15px 0;
+}
+.searchProjectsDiv img {
+    width: 30px;
+    height: 30px;
+    margin: 0 10px -13px 0;
+}
+.searchProjectsDiv input {
+    border: none;
+    border-bottom: 2px solid var(--white);
+    font-size: 14px;
+    font-weight: 100;
+    outline: none;
+    background: none;
+    line-height: 30px;
+    color: var(--white);
+}
+@media only screen and (min-width: 768px) {
+    .searchProjectsArticle {
+        align-items: flex-start !important;
+    }
+    .searchProjectsHeadDiv {
+        max-width: 390px;
+        justify-content: flex-start !important;
+    }
+    .searchProjectsArticleHead {
+        max-width: 100%;
+    }
+    .searchProjectsArticleHead h2 {
+        font-size: 28px;
+    }
+    .searchProjectsArticleHead p {
+        font-size: 20px;
+    }
+    .searchProjectsDiv input {
+        font-size: 20px;
+    }
+}

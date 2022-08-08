@@ -48,3 +48,31 @@
 .removeEditDiv img:hover {
     cursor: pointer;
 }
+
+@media only screen and (min-width: 768px) {
+    .projectArticle {
+        width: 450px;
+    }
+    .projectLogo {
+        height: 77px;
+        width: 77px;
+    }
+    .avatar {
+        height: 40px;
+        width: 40px;
+    }
+    .projectNameDiv {
+        font-size: 20px;
+        margin-left: 16px;
+    }
+    .projectTeamMember {
+        font-size: 18px;
+    }
+    .removeEditDiv {
+        font-size: 18px;
+    }
+    .removeEditDiv img {
+        height: 30px;
+        width: 30px;
+    }
+}

@@ -1,12 +1,16 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import defaultAvatar from '../../assets/icons/defaultAvatad.jpg';
 import edit from '../../assets/icons/edit-button.png';
 import remove from '../../assets/icons/close-button.png';
 //import { useSelector } from 'react-redux/es/exports';
+import { projectsAuthor } from '../../features/projectsAuthor/projectsAuthorSlice';
 import styles from './showProjects.module.css';
 import '../../App.css';
 import '../../theme.module.css';
 
 const ProjectArticle = ({ project }) => {
+    const dispatch = useDispatch();
     const projectName = project.attributes.name;
     const api_url = 'http://localhost:1338';
     const projectLogo =
@@ -17,6 +21,9 @@ const ProjectArticle = ({ project }) => {
     const numOfEmployees = project.attributes.employees.data.length;
     //const data = useSelector((state) => state.auth);
     //console.log(projectLogo);
+    useEffect(() => {
+        dispatch(projectsAuthor(authorAvatar));
+    }, [authorAvatar]);
     return (
         <article
             className={`flex

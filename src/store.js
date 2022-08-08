@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './features/auth/authSlice';
 import searchReducer from './features/searchProjects/searchProjectsSlice';
+import projectsAuthorReducer from './features/projectsAuthor/projectsAuthorSlice';
 import { apiSlice } from './api/apiSlice';
 
 import {
@@ -27,6 +28,7 @@ export const store = configureStore({
     reducer: {
         auth: persistedReducer,
         search: searchReducer,
+        projectsAuthor: projectsAuthorReducer,
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
 

@@ -6,9 +6,9 @@ import { useEffect } from 'react';
 
 import doc from '../../assets/icons/document.png';
 import search from '../../assets/icons/search.png';
-import styles from './header.module.css';
+import styles from './searchProjectsArticle.module.css';
 
-const Header = () => {
+const SearchProjectsArticle = () => {
     const dispatch = useDispatch();
 
     const [searchProjectsValue, setSearchProjectsValue] = useState('');
@@ -22,10 +22,10 @@ const Header = () => {
     }, [searchProjectsValue]);
 
     return (
-        <div className={styles.header}>
-            <div>
+        <div className={`flex ${styles.searchProjectsArticle}`}>
+            <div className={`flex ${styles.searchProjectsHeadDiv}`}>
                 <img src={doc} alt="document" />
-                <div className={styles.headerHead}>
+                <div className={styles.searchProjectsArticleHead}>
                     <h2>Projects</h2>
                     <p>Here you'll find all your projects</p>
                 </div>
@@ -44,4 +44,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default SearchProjectsArticle;

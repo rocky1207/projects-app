@@ -7,7 +7,7 @@ function App() {
     const state = useSelector((state) => state.auth);
 
     const token = state.token;
-    console.log(state);
+
     return <>{token ? <AppRoutes /> : <LoginRoutes />}</>;
 }
 
