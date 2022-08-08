@@ -71,12 +71,12 @@
     }
     @keyframes mymove {
         0% {
-            top: 0px;
+            top: 0;
             left: 0px;
         }
 
         100% {
-            top: 0;
+            top: -100px;
             left: 73px;
         }
     }
