@@ -1,5 +1,6 @@
 .projectArticle {
     background-color: rgba(240, 255, 240, 0.8);
+
     width: 90%;
     margin: 0 auto 20px auto;
     padding: 10px 15px 8px 7px;
@@ -51,7 +52,8 @@
 
 @media only screen and (min-width: 768px) {
     .projectArticle {
-        width: 450px;
+        max-width: 800px;
+        border-radius: 12px;
     }
     .projectLogo {
         height: 77px;

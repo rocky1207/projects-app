@@ -10,7 +10,9 @@ export const projectsApiSlice = apiSlice.injectEndpoints({
                 '&filters[$or][0][employees][id][$eq]=' +
                 filterDatas.currentUserId +
                 '&filters[$or][1][author][id][$eq]=' +
-                filterDatas.currentUserId,
+                filterDatas.currentUserId +
+                '&pagination[page]=' +
+                filterDatas.pageNumber,
         }),
     }),
 });
