@@ -14,6 +14,13 @@ export const projectsApiSlice = apiSlice.injectEndpoints({
                 '&pagination[page]=' +
                 filterDatas.pageNumber,
         }),
+        addProject: builder.mutation({
+            query: (datas) => ({
+                url: '/projects',
+                method: 'POST',
+                body: datas,
+            }),
+        }),
     }),
 });
-export const { useProjectsQuery } = projectsApiSlice;
+export const { useProjectsQuery, useAddProjectMutation } = projectsApiSlice;

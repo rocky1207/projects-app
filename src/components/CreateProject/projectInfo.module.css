@@ -1,0 +1,92 @@
+.projectInfo {
+    max-width: 90%;
+    margin: 40px auto;
+}
+.projectInfoForm {
+    width: 100%;
+    padding: 0;
+}
+.projectInfoDiv h3 {
+    font-size: 24px;
+    margin: 0 0 20px 0;
+}
+.projectNameDiv {
+    margin: 0 0 20px 0;
+}
+.projectNameDiv input {
+    background: none;
+    border: none;
+    border-bottom: 1px solid var(--white);
+    width: 90%;
+    color: var(--white);
+    outline: none;
+    font-size: 18px;
+}
+.projectNameLabel {
+    display: block;
+    margin: 0 0 10px 0;
+}
+
+.projectLogoDiv {
+    border: 1px solid var(--white);
+    padding: 10px;
+    max-width: 90%;
+    margin: 0 0 20px 0;
+    border-radius: 10px;
+}
+.projectLogoDiv label {
+    display: block;
+    margin: 0 0 10px 0;
+}
+.projectDescriptionDiv {
+    margin: 0 0 20px 0;
+}
+.projectDescriptionDiv label {
+    display: block;
+    margin-bottom: 10px;
+}
+.projectDescriptionDiv textarea {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--white);
+    width: 90%;
+    min-height: 100px;
+    background: none;
+    border-radius: 10px;
+    padding: 10px;
+    outline: none;
+}
+.projectMembersDiv h3 {
+    margin: 0 0 10px 0;
+}
+.projectMembersDiv input {
+    background: none;
+    border: none;
+    border-bottom: 2px solid var(--white);
+    font-size: 18px;
+    width: 90%;
+    outline: none;
+    color: var(--white);
+}
+@media screen and (min-width: 767px) {
+    .projectInfoDiv {
+        display: flex;
+        justify-content: space-between;
+        max-width: 790px;
+        margin: 0 0 0 77px;
+    }
+    .projectDescriptionDiv {
+        margin: 0 0 40px 290px;
+        width: 470px;
+    }
+    .projectMembersDiv {
+        margin: 0 0 0 82px;
+    }
+    .projectMembersDiv h3 {
+        font-size: 25px;
+    }
+    .projectMembersDiv input {
+        max-width: 60%;
+        margin-left: 217px;
+    }
+}

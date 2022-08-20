@@ -1,0 +1,33 @@
+.createProjectArticle {
+    max-width: 90%;
+    margin: 40px auto;
+}
+.createProjectArticle img {
+    height: 70px;
+    width: 70px;
+}
+.createProjectArticleHead {
+    max-width: 240px;
+}
+.createProjectArticleHead h2 {
+    font-size: 24px;
+}
+.createProjectArticleHead p {
+    font-size: 16px;
+}
+
+@media only screen and (min-width: 768px) {
+    .createProjectArticle {
+        align-items: flex-start !important;
+    }
+    .createProjectArticleHead {
+        max-width: 340px;
+    }
+
+    .createProjectArticleHead h2 {
+        font-size: 28px;
+    }
+    .createProjectArticleHead p {
+        font-size: 20px;
+    }
+}

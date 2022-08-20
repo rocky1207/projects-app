@@ -3,6 +3,7 @@ import Button from '../Elements/Button/Button';
 import { searchProjects } from '../../features/searchProjects/searchProjectsSlice';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import doc from '../../assets/icons/document.png';
 import search from '../../assets/icons/search.png';
@@ -22,7 +23,7 @@ const SearchProjectsArticle = () => {
     }, [searchProjectsValue]);
 
     return (
-        <div className={`flex ${styles.searchProjectsArticle}`}>
+        <article className={`flex ${styles.searchProjectsArticle}`}>
             <div className={`flex ${styles.searchProjectsHeadDiv}`}>
                 <img src={doc} alt="document" />
                 <div className={styles.searchProjectsArticleHead}>
@@ -39,8 +40,10 @@ const SearchProjectsArticle = () => {
                     onChange={(e) => setSearchProjectsValue(e.target.value)}
                 />
             </div>
-            <Button props={buttonProps}></Button>
-        </div>
+            <Link to="create-project">
+                <Button props={buttonProps}></Button>
+            </Link>
+        </article>
     );
 };
 
