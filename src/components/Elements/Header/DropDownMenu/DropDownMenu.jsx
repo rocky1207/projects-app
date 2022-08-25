@@ -9,7 +9,7 @@ import styles from './dropDovnMenu.module.css';
 const DropDownMenu = () => {
     const author = useSelector((state) => state.projectsAuthor.avatar);
 
-    const api_url = 'http://localhost:1338';
+    const api_url = 'http://localhost:1337';
     const dispatch = useDispatch();
 
     return (

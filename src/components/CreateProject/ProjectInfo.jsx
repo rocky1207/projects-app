@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react';
-import { useUploadImageMutation } from '../../api/uplaodImage/uploadImageApiSlice';
 import FiltratedUsers from '../FiltratedUsers/FiltratedUsers';
 import styles from './projectInfo.module.css';
 
 const ProjectInfo = ({ props }) => {
     const {
+        projectName,
         setProjectName,
+        projectDescription,
         setProjectDescription,
         setFilter,
         formDataHandler,
         employees,
     } = props;
-    console.log(employees);
+
     return (
         <>
             <div className={styles.projectInfo}>
@@ -25,6 +25,7 @@ const ProjectInfo = ({ props }) => {
                             <input
                                 type="text"
                                 placeholder="Enter project name"
+                                value={projectName}
                                 onChange={(e) => setProjectName(e.target.value)}
                             />
                         </div>
@@ -42,6 +43,7 @@ const ProjectInfo = ({ props }) => {
                         <label>Project description:</label>
                         <textarea
                             placeholder="Descripte project"
+                            value={projectDescription}
                             onChange={(e) =>
                                 setProjectDescription(e.target.value)
                             }
@@ -52,7 +54,11 @@ const ProjectInfo = ({ props }) => {
                     <h3>Members</h3>
                     <input
                         placeholder="Choose team members"
-                        onChange={(e) => setFilter(e.target.value)}
+                        onChange={(e) => {
+                            if (e.target.value.length > 2) {
+                                return setFilter(e.target.value);
+                            }
+                        }}
                     />
                 </div>
             </div>

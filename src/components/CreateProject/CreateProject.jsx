@@ -2,37 +2,43 @@ import { useState, useEffect } from 'react';
 import doc from '../../assets/icons/document.png';
 import Button from '../Elements/Button/Button';
 import ProjectInfo from './ProjectInfo';
-import styles from './createProject.module.css';
-
 import { useUploadImageMutation } from '../../api/uplaodImage/uploadImageApiSlice';
+import { deleteAllProjectMembers } from '../../features/projects/projectsSlice';
 import { useAddProjectMutation } from '../../api/projects/projectsApiSlice';
 import { useGetFiltratedUsersQuery } from '../../api/userRole/userRoleApiSlice';
+import { useSelector, useDispatch } from 'react-redux/es/exports';
+import { useNavigate } from 'react-router-dom';
+import styles from './createProject.module.css';
 
 const CreateProject = () => {
+    const { currentUserId } = useSelector((state) => state.auth);
+    const { members } = useSelector((state) => state.projects);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [projectName, setProjectName] = useState('');
     const [projectDescription, setProjectDescription] = useState('');
     const [projectLogoFile, setProjectLogoFile] = useState();
     const [logoId, setLogoId] = useState();
     const [employees, setEmployees] = useState([]);
-    const [filter, setFilter] = useState('');
+    const [filter, setFilter] = useState();
 
-    const [addProject, { data: addProjectData, error: addProjectError }] =
-        useAddProjectMutation();
+    const [addProject, { isSuccess: isProjectAdded }] = useAddProjectMutation();
 
     const { data: filtratedUsersData, error: getFiltratedUsersError } =
         useGetFiltratedUsersQuery(filter);
+
     useEffect(() => {
         setEmployees(filtratedUsersData);
     }, [filtratedUsersData]);
 
-    const [uploadImage, { data, isSuccess, isError, error }] =
-        useUploadImageMutation();
+    const [uploadImage, { data }] = useUploadImageMutation();
 
     const formData = new FormData();
 
-    const formDataHandler = (hm) => {
-        if (hm) {
-            formData.append('files', hm);
+    const formDataHandler = (fileString) => {
+        if (fileString) {
+            formData.append('files', fileString);
 
             setProjectLogoFile(formData);
         }
@@ -55,23 +61,14 @@ const CreateProject = () => {
             data.map((dataObj) => setLogoId(dataObj.id));
         }
     }, [data]);
-    console.log(logoId);
 
-    const buttonProps = {
-        value: 'Save',
-        elClassName: 'button',
-        type: 'submit',
-    };
-    console.log(projectName);
-    console.log(projectDescription);
-    console.log(projectLogoFile);
     const newProjectDatas = {
         data: {
-            name: 'seventh project',
-            employees: [20, 22],
-            logo: 199,
-            description: 'test description 7',
-            author: 1,
+            name: projectName,
+            employees: members,
+            logo: logoId,
+            description: projectDescription,
+            author: currentUserId,
         },
     };
     const newProjectSubmit = async () => {
@@ -82,16 +79,37 @@ const CreateProject = () => {
         }
     };
 
-    console.log(addProjectData);
+    const buttonProps = {
+        value: 'Save',
+        elClassName: 'button',
+        type: 'submit',
+        action: () => {
+            newProjectSubmit();
+        },
+    };
 
     const projectInfoProps = {
+        projectName,
         setProjectName,
+        projectDescription,
         setProjectDescription,
+        projectLogoFile,
         setProjectLogoFile,
         employees,
         formDataHandler,
+        filter,
         setFilter,
     };
+
+    useEffect(() => {
+        if (isProjectAdded) {
+            setProjectName('');
+            setProjectDescription('');
+            setEmployees([]);
+            dispatch(deleteAllProjectMembers([]));
+            navigate('/');
+        }
+    }, [isProjectAdded]);
 
     return (
         <section className="app">
@@ -104,7 +122,10 @@ const CreateProject = () => {
                     </div>
                 </div>
 
-                <Button props={buttonProps}></Button>
+                <Button
+                    props={buttonProps}
+                    action={() => newProjectSubmit()}
+                ></Button>
             </article>
             <ProjectInfo props={projectInfoProps} />
         </section>

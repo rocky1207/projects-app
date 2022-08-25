@@ -10,12 +10,9 @@ const searchProjectsSlice = createSlice({
     initialState,
     reducers: {
         searchProjects: (state, action) => {
-            console.log(action);
-
             state.filterParams = action.payload;
         },
         getPageNumber: (state, action) => {
-            console.log(action);
             state.pageNumber = parseInt(action.payload);
         },
     },

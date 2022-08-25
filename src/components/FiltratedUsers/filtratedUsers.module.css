@@ -1,0 +1,43 @@
+.filtratedUsersArticle {
+    background: var(--white);
+    margin: 0 auto 20px auto;
+    padding: 8px 14px;
+    color: #1a202c;
+    width: 90%;
+    border-radius: 10px;
+}
+.filtratedUsersAvatar {
+    margin-right: 8px;
+}
+.filtratedUsersAvatar img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.employeeInfoUsername {
+    font-size: 14px;
+}
+.employeeInfoEmail {
+    font-size: 12px;
+}
+
+@media screen and (min-width: 767px) {
+    .filtratedUsersArticle {
+        padding: 8px 14px;
+        color: #1a202c;
+        width: 550px;
+    }
+    .filtratedUsersAvatar {
+        margin-right: 12px;
+    }
+    .filtratedUsersAvatar img {
+        width: 35px;
+        height: 35px;
+    }
+    .employeeInfoUsername {
+        font-size: 16px;
+    }
+    .employeeInfoEmail {
+        font-size: 14px;
+    }
+}

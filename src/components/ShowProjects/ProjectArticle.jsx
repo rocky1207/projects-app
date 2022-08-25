@@ -4,7 +4,7 @@ import defaultAvatar from '../../assets/icons/defaultAvatad.jpg';
 import edit from '../../assets/icons/edit-button.png';
 import remove from '../../assets/icons/close-button.png';
 //import { useSelector } from 'react-redux/es/exports';
-import { projectsAuthor } from '../../features/projectsAuthor/projectsAuthorSlice';
+import { projectsAuthor } from '../../features/projects/projectsSlice';
 import styles from './showProjects.module.css';
 import '../../App.css';
 import '../../theme.module.css';
@@ -12,7 +12,7 @@ import '../../theme.module.css';
 const ProjectArticle = ({ project }) => {
     const dispatch = useDispatch();
     const projectName = project.attributes.name;
-    const api_url = 'http://localhost:1338';
+    const api_url = 'http://localhost:1337';
     const projectLogo =
         project?.attributes?.logo?.data?.attributes.formats.thumbnail.url;
     const authorAvatar =

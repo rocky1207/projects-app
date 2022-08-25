@@ -1,7 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './features/auth/authSlice';
 import searchReducer from './features/searchProjects/searchProjectsSlice';
-import projectsAuthorReducer from './features/projectsAuthor/projectsAuthorSlice';
+import projectsReducer from './features/projects/projectsSlice';
+
 import { apiSlice } from './api/apiSlice';
 
 import {
@@ -22,13 +23,18 @@ const persistConfig = {
     storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, authReducer);
+const persistedReducer = persistReducer(
+    persistConfig,
+    authReducer,
+    projectsReducer
+);
 
 export const store = configureStore({
     reducer: {
         auth: persistedReducer,
         search: searchReducer,
-        projectsAuthor: projectsAuthorReducer,
+        projects: projectsReducer,
+
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
 

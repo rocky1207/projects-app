@@ -11,11 +11,13 @@ import { useDispatch } from 'react-redux';
 import styles from './header.module.css';
 
 const Header = () => {
-    const author = useSelector((state) => state.projectsAuthor.avatar);
+    const author = useSelector((state) => state.projects.avatar);
+
     const dispatch = useDispatch();
     const [showDropMenu, setShowDropMenu] = useState(false);
 
-    const api_url = 'http://localhost:1338';
+    const api_url = 'http://localhost:1337';
+
     return (
         <div className={`flex ${styles.header}`}>
             <div className={`flex ${styles.logoDiv}`}>
