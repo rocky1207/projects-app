@@ -8,7 +8,7 @@ import { useAddProjectMutation } from '../../api/projects/projectsApiSlice';
 import { useGetFiltratedUsersQuery } from '../../api/userRole/userRoleApiSlice';
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 import { useNavigate } from 'react-router-dom';
-import { createProjectValidate } from '../Auth/validateFunctions/createProjectValidate';
+
 import styles from './createProject.module.css';
 
 const CreateProject = () => {
@@ -84,7 +84,6 @@ const CreateProject = () => {
         console.log('ete ga');
         try {
             await addProject(newProjectDatas);
-            createProjectValidate();
         } catch (err) {
             console.log(err);
         }
