@@ -8,6 +8,7 @@ import { useAddProjectMutation } from '../../api/projects/projectsApiSlice';
 import { useGetFiltratedUsersQuery } from '../../api/userRole/userRoleApiSlice';
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 import { useNavigate } from 'react-router-dom';
+import { createProjectValidate } from '../Auth/validateFunctions/createProjectValidate';
 import styles from './createProject.module.css';
 
 const CreateProject = () => {
@@ -22,6 +23,8 @@ const CreateProject = () => {
     const [logoId, setLogoId] = useState();
     const [employees, setEmployees] = useState([]);
     const [filter, setFilter] = useState();
+
+    const [disabled, setDisabled] = useState(true);
 
     const [addProject, { isSuccess: isProjectAdded }] = useAddProjectMutation();
 
@@ -71,9 +74,17 @@ const CreateProject = () => {
             author: currentUserId,
         },
     };
+
+    /*
+    const newProjectValidation = () => {
+        const bla = createProjectValidate(newProjectDatas.data);
+    };
+    */
     const newProjectSubmit = async () => {
+        console.log('ete ga');
         try {
             await addProject(newProjectDatas);
+            createProjectValidate();
         } catch (err) {
             console.log(err);
         }
@@ -83,11 +94,25 @@ const CreateProject = () => {
         value: 'Save',
         elClassName: 'button',
         type: 'submit',
+        disabled: disabled ? true : false,
         action: () => {
             newProjectSubmit();
         },
     };
-
+    console.log(buttonProps);
+    useEffect(() => {
+        if (
+            newProjectDatas.data.name &&
+            newProjectDatas.data.employees.length > 0 &&
+            newProjectDatas.data.logo &&
+            newProjectDatas.data.description
+        ) {
+            setDisabled(false);
+            console.log('uspeh');
+        } else {
+            setDisabled(true);
+        }
+    }, [newProjectDatas]);
     const projectInfoProps = {
         projectName,
         setProjectName,
@@ -117,7 +142,7 @@ const CreateProject = () => {
                 <div className={`flex ${styles.createProjectHeadDiv}`}>
                     <img src={doc} alt="document" />
                     <div className={styles.createProjectArticleHead}>
-                        <h2 onClick={newProjectSubmit}>Create a Project</h2>
+                        <h2>Create a Project</h2>
                         <p>Here you can create a new project</p>
                     </div>
                 </div>
