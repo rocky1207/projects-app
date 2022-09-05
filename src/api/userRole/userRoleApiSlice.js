@@ -3,7 +3,7 @@ import { apiSlice } from '../apiSlice';
 export const userRoleApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         userRole: builder.query({
-            query: () => 'users/me',
+            query: () => 'users/me?populate=*',
         }),
         getFiltratedUsers: builder.query({
             query: (filter) =>

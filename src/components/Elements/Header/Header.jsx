@@ -7,6 +7,7 @@ import SvgSun from '../../iconComponents/SvgSun';
 import defaultAvatar from '../../../assets/icons/defaultAvatad.jpg';
 import { logOut } from '../../../features/auth/authSlice';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import styles from './header.module.css';
 
@@ -14,6 +15,7 @@ const Header = () => {
     const author = useSelector((state) => state.projects.avatar);
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [showDropMenu, setShowDropMenu] = useState(false);
 
     const api_url = 'http://localhost:1337';
@@ -23,7 +25,10 @@ const Header = () => {
             <div className={`flex ${styles.logoDiv}`}>
                 <figure
                     className={styles.logoFigure}
-                    onClick={() => dispatch(logOut())}
+                    onClick={() => {
+                        dispatch(logOut());
+                        navigate('/');
+                    }}
                 >
                     <img src={logo} alt="Logo" />
                 </figure>

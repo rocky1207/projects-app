@@ -1,6 +1,9 @@
 import LoginRoutes from './routes/LoginRoutes';
 import AppRoutes from './routes/AppRoutes';
 import { useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 function App() {
@@ -8,7 +11,12 @@ function App() {
 
     const token = state.token;
 
-    return <>{token ? <AppRoutes /> : <LoginRoutes />}</>;
+    return (
+        <>
+            {token ? <AppRoutes /> : <LoginRoutes />}
+            <ToastContainer />
+        </>
+    );
 }
 
 export default App;

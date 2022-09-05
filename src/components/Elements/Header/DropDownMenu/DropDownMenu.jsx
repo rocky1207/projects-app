@@ -7,7 +7,7 @@ import defalutAvatar from '../../../../assets/icons/defaultAvatad.jpg';
 import styles from './dropDovnMenu.module.css';
 
 const DropDownMenu = () => {
-    const author = useSelector((state) => state.projectsAuthor.avatar);
+    const author = useSelector((state) => state.projects.avatar);
 
     const api_url = 'http://localhost:1337';
     const dispatch = useDispatch();

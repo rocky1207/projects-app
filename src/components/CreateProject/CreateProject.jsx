@@ -8,7 +8,9 @@ import { useAddProjectMutation } from '../../api/projects/projectsApiSlice';
 import { useGetFiltratedUsersQuery } from '../../api/userRole/userRoleApiSlice';
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
+import 'react-toastify/dist/ReactToastify.css';
 import styles from './createProject.module.css';
 
 const CreateProject = () => {
@@ -26,7 +28,23 @@ const CreateProject = () => {
 
     const [disabled, setDisabled] = useState(true);
 
-    const [addProject, { isSuccess: isProjectAdded }] = useAddProjectMutation();
+    const [
+        addProject,
+        {
+            isSuccess: isProjectAdded,
+            isError: isProjectFailed,
+            error: addProjectError,
+        },
+    ] = useAddProjectMutation();
+    useEffect(() => {
+        if (isProjectAdded) {
+            console.log('added');
+            toast('Project successfully aded!');
+        }
+        if (isProjectFailed) {
+            toast(addProjectError);
+        }
+    }, [isProjectAdded, isProjectFailed]);
 
     const { data: filtratedUsersData, error: getFiltratedUsersError } =
         useGetFiltratedUsersQuery(filter);
@@ -75,17 +93,11 @@ const CreateProject = () => {
         },
     };
 
-    /*
-    const newProjectValidation = () => {
-        const bla = createProjectValidate(newProjectDatas.data);
-    };
-    */
     const newProjectSubmit = async () => {
-        console.log('ete ga');
         try {
             await addProject(newProjectDatas);
         } catch (err) {
-            console.log(err);
+            toast(err);
         }
     };
 
@@ -107,7 +119,6 @@ const CreateProject = () => {
             newProjectDatas.data.description
         ) {
             setDisabled(false);
-            console.log('uspeh');
         } else {
             setDisabled(true);
         }

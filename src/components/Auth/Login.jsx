@@ -1,24 +1,30 @@
 import { useState, useEffect } from 'react';
-
 import { Link } from 'react-router-dom';
-
 import { loginCredentials } from '../../features/auth/authSlice';
-
 import { useDispatch } from 'react-redux';
-
 import { useLoginMutation } from '../../api/loginUser/loginUserSlice';
+
+import { toast } from 'react-toastify';
 
 import styles from './Auth.module.css';
 
 const Login = () => {
     const dispatch = useDispatch();
 
-    const [login, { data, isLoading, isSuccess }] = useLoginMutation();
+    const [
+        login,
+        {
+            data,
+            isLoading,
+            isSuccess: isLoginSuccess,
+            response,
+            isError: isLoginError,
+            error: loginError,
+        },
+    ] = useLoginMutation();
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
-    useEffect(() => {});
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -29,25 +35,62 @@ const Login = () => {
 
         try {
             await login(datas);
-        } catch (err) {
-            console.log(err);
+        } catch (error) {
+            /*
+            if (error.details.errors) {
+                console.log(error.details.errors);
+                error.details.errors.map((error) => toast.error(error));
+            } else {
+                toast.error(error.data.message);
+            }
+*/
+            // console.log(error);
         }
 
         setUsername('');
         setPassword('');
     };
+
     useEffect(() => {
-        if (isSuccess) {
+        if (isLoginSuccess) {
             console.log(data);
             localStorage.setItem('token', data.jwt);
             dispatch(loginCredentials(data));
+            toast('Login Success');
         }
-    }, [isSuccess]);
-
+        if (isLoginError) {
+            if (loginError.data.error.details.errors) {
+                loginError.data.error.details.errors.map((error) =>
+                    toast.error(error.message)
+                );
+            } else {
+                toast.error(loginError.data.error.message);
+            }
+        }
+    }, [isLoginSuccess, isLoginError]);
+    /*
+    useEffect(() => {
+        if (isLoginError) {
+            toast(loginError.data.error.message);
+            console.log(loginError);
+        }
+    }, [isLoginError]);
+*/
+    /*
+    useEffect(() => {
+        if (loginSuccess) {
+            localStorage.setItem('token', data.jwt);
+            dispatch(loginCredentials(data));
+            toast('LogIn success!');
+        }
+        if (isLoginError) {
+            toast(loginError);
+        }
+    }, [loginSuccess, isLoginError]);
     if (isLoading) {
         return <h2>Loading...</h2>;
     }
-
+*/
     return (
         <section className={styles.authSection}>
             <form onSubmit={(e) => submitHandler(e)}>

@@ -30,6 +30,14 @@
 .btn:hover {
     background-color: var(--button-green);
 }
+
+.paginationButton {
+    color: var(--white);
+    background: none;
+    margin: 0;
+    padding: 5px;
+    font-size: 20px;
+}
 @media screen and (min-width: 768px) {
     .button {
         font-size: 18px;

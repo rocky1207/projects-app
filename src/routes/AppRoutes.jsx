@@ -7,8 +7,8 @@ import Header from '../components/Elements/Header/Header';
 const AppRoutes = () => {
     return (
         <>
-            <Header />
             <Router>
+                <Header />
                 <Routes>
                     <Route path="create-project" element={<CreateProject />} />
                     <Route path="/" element={<MyProjects />} />
