@@ -14,7 +14,7 @@ body {
     position: relative;
 }
 .app {
-    overflow: hidden;
+    padding: 0 0 100px 0;
 }
 .flex {
     display: flex;

@@ -51,6 +51,10 @@
 }
 
 @media only screen and (min-width: 768px) {
+    .someDiv {
+        height: 400px;
+        overflow-y: auto;
+    }
     .projectArticle {
         max-width: 800px;
         border-radius: 12px;
@@ -76,5 +80,11 @@
     .removeEditDiv img {
         height: 30px;
         width: 30px;
+    }
+}
+@media only screen and (min-width: 1144px) {
+    .someDiv {
+        height: 450px;
+        overflow-y: auto;
     }
 }

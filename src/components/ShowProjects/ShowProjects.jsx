@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
     useProjectsLengthQuery,
     useProjectsQuery,
@@ -9,13 +10,13 @@ import {
 import SearchProjectsArticle from '../SearchProjectsArticle/SearchProjectsArticle';
 import ProjectsPagination from '../ProjectsPagination/ProjectsPagination';
 import { useUserRoleQuery } from '../../api/userRole/userRoleApiSlice';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ProjectArticle from './ProjectArticle';
 
 import { toast } from 'react-toastify';
 
+import styles from './showProjects.module.css';
 import '../../App.css';
-import { useEffect } from 'react';
 
 const ShowProjects = () => {
     const { currentUserId } = useSelector((state) => state.auth);
@@ -24,17 +25,18 @@ const ShowProjects = () => {
     const { data: roleData } = useUserRoleQuery();
 
     const { data: projectsLength } = useProjectsLengthQuery();
-
+    console.log(projectsLength);
     useEffect(() => {
         const num = Math.ceil(projectsLength?.data?.length / 5);
         console.log(num);
 
-        dispatch(setPageNumber(num));
+        dispatch(setPageNumber(1));
+        // dispatch(setPageNumber(num));
         dispatch(setMaxPageNumber(num));
     }, [projectsLength]);
 
     const { filterParams, pageNumber } = useSelector((state) => state.search);
-
+    console.log(pageNumber);
     const filterDatas = {
         filterParams,
         currentUserId,
@@ -54,9 +56,13 @@ const ShowProjects = () => {
     return (
         <section className="app">
             <SearchProjectsArticle />
-            {data?.data.map((project) => {
-                return <ProjectArticle key={project.id} project={project} />;
-            })}
+            <div className={styles.someDiv}>
+                {data?.data.map((project) => {
+                    return (
+                        <ProjectArticle key={project.id} project={project} />
+                    );
+                })}
+            </div>
 
             <ProjectsPagination />
         </section>

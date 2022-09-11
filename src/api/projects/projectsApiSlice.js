@@ -21,13 +21,13 @@ export const projectsApiSlice = apiSlice.injectEndpoints({
                     filterDatas.pageNumber +
                     '&pagination[pageSize]=5',
             }),
+            /*
             transformResponse: (response) => {
-                console.log('transform', response);
-
                 const bla = response.data.reverse();
                 console.log(bla);
                 return { data: bla };
             },
+*/
             providesTags: ['Projects'],
         }),
         addProject: builder.mutation({

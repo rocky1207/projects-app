@@ -1,5 +1,5 @@
 .paginationRootDiv {
-    max-width: 800px;
+    width: 800px;
     margin: 0 auto;
 }
 .paginationContainerDiv {
@@ -9,8 +9,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(30, 30, 30, 0.9);
-    padding: 10px 0;
 }
 .pagination button {
     color: rgba(255, 255, 255, 0.87);

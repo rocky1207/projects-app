@@ -34,9 +34,16 @@
 .paginationButton {
     color: var(--white);
     background: none;
-    margin: 0;
+    margin: 0 2px;
     padding: 5px;
+    font-size: 16px;
+}
+.arrowButton {
+    margin: 0 10px;
+}
+.bla {
     font-size: 20px;
+    font-weight: bold;
 }
 @media screen and (min-width: 768px) {
     .button {
@@ -44,5 +51,14 @@
     }
     .btn {
         padding: 4px 40px;
+    }
+    .paginationButton {
+        font-size: 24px;
+        margin: 0 6px;
+        padding: 7px;
+    }
+    .bla {
+        font-size: 34px;
+        font-weight: bold;
     }
 }

@@ -19,6 +19,7 @@ const searchProjectsSlice = createSlice({
 
             state.pageNumber = sentNumber;
 
+            /*
             const number = parseInt(action.payload);
 
             const maxPages = state.maxPageNumber;
@@ -31,8 +32,15 @@ const searchProjectsSlice = createSlice({
             let niz2 = niz1.reverse();
 
             const pagintionPage = niz2.indexOf(number);
-
+            //const pagintionPage = niz1.indexOf(number);
             state.pageNumber = pagintionPage + 1;
+            */
+        },
+        incPageNumber: (state, action) => {
+            const payload = parseInt(action.payload);
+            //console.log(payload);
+            state.pageNumber += payload;
+            console.log(state.pageNumber);
         },
         setPageNumber: (state, action) => {
             state.pageNumber = parseInt(action.payload);
@@ -48,6 +56,7 @@ export const {
     getPageNumber,
     setPageNumber,
     setMaxPageNumber,
+    incPageNumber,
 } = searchProjectsSlice.actions;
 
 export default searchProjectsSlice.reducer;
