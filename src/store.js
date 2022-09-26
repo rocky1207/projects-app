@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './features/auth/authSlice';
 import searchReducer from './features/searchProjects/searchProjectsSlice';
 import projectsReducer from './features/projects/projectsSlice';
-
+import { combineReducers } from '@reduxjs/toolkit';
 import { apiSlice } from './api/apiSlice';
 
 import {
@@ -21,15 +21,25 @@ const persistConfig = {
     key: 'root',
     version: 1,
     storage,
+    blacklist: [apiSlice.reducerPath],
 };
+
+const reducer = combineReducers({
+    projects: projectsReducer,
+    auth: authReducer,
+    search: searchReducer,
+    [apiSlice.reducerPath]: apiSlice.reducer,
+});
 
 const persistedReducer = persistReducer(
     persistConfig,
-    authReducer,
-    projectsReducer
+    reducer
+    //authReducer
+    //projectsReducer
 );
 
 export const store = configureStore({
+    /*
     reducer: {
         auth: persistedReducer,
         search: searchReducer,
@@ -37,7 +47,8 @@ export const store = configureStore({
 
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
-
+*/
+    reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: {

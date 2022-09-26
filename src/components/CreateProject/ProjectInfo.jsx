@@ -1,12 +1,11 @@
 import FiltratedUsers from '../FiltratedUsers/FiltratedUsers';
+
 import styles from './projectInfo.module.css';
 
 const ProjectInfo = ({ props }) => {
     const {
-        projectName,
-        setProjectName,
-        projectDescription,
-        setProjectDescription,
+        newProjectDatas,
+        setNewProjectDatas,
         setFilter,
         formDataHandler,
         employees,
@@ -25,8 +24,13 @@ const ProjectInfo = ({ props }) => {
                             <input
                                 type="text"
                                 placeholder="Enter project name"
-                                value={projectName}
-                                onChange={(e) => setProjectName(e.target.value)}
+                                value={newProjectDatas.projectName}
+                                onChange={(e) =>
+                                    setNewProjectDatas({
+                                        ...newProjectDatas,
+                                        name: e.target.value,
+                                    })
+                                }
                             />
                         </div>
                         <div className={styles.projectLogoDiv}>
@@ -43,9 +47,12 @@ const ProjectInfo = ({ props }) => {
                         <label>Project description:</label>
                         <textarea
                             placeholder="Descripte project"
-                            value={projectDescription}
+                            value={newProjectDatas.description}
                             onChange={(e) =>
-                                setProjectDescription(e.target.value)
+                                setNewProjectDatas({
+                                    ...newProjectDatas,
+                                    description: e.target.value,
+                                })
                             }
                         ></textarea>
                     </div>

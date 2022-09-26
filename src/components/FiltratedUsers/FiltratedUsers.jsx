@@ -5,18 +5,23 @@ import Button from '../Elements/Button/Button';
 import { useDispatch } from 'react-redux';
 import { addProjectMembers } from '../../features/projects/projectsSlice';
 import { removeProjectMember } from '../../features/projects/projectsSlice';
+import { editProject } from '../../features/projects/projectsSlice';
 import styles from './filtratedUsers.module.css';
 import '../../App.css';
 
 const FiltratedUsers = ({ employee }) => {
     const dispatch = useDispatch();
-    const [addRemove, setAddRemove] = useState(true);
+    const ha = [];
+    ha.push(employee.isOn);
+    const [addRemove, setAddRemove] = useState(ha); 
+    //console.log(addRemove);
     const [buttonProps, setButtonProps] = useState({
         value: 'Add',
         elClassName: 'btn',
         type: 'button',
         action: () => {
-            setAddRemove((prev) => !prev);
+            // setAddRemove((prev) => !prev);
+            //dispatch(editProject(employee.id));
             dispatch(addProjectMembers(employee.id));
         },
     });
@@ -25,27 +30,31 @@ const FiltratedUsers = ({ employee }) => {
     const avatar = employee?.logo?.formats.thumbnail.url;
 
     useEffect(() => {
-        if (addRemove === false) {
-            setButtonProps({
-                ...buttonProps,
-                value: 'Remove',
-                action: () => {
-                    setAddRemove((prev) => !prev);
-                    dispatch(removeProjectMember(employee.id));
-                },
-            });
-        } else {
-            setButtonProps({
-                ...buttonProps,
-                value: 'Add',
-                elClassName: 'btn',
-                type: 'button',
-                action: () => {
-                    setAddRemove((prev) => !prev);
-                    dispatch(addProjectMembers(employee.id));
-                },
-            });
-        }
+        // console.log(addRemove);
+        addRemove.map((bla) => {
+            if (bla === false) {
+                setButtonProps({
+                    ...buttonProps,
+                    value: 'Remove',
+                    action: () => {
+                        setAddRemove([...addRemove, true]);
+
+                        dispatch(removeProjectMember(employee.id));
+                    },
+                });
+            } else {
+                setButtonProps({
+                    ...buttonProps,
+                    value: 'Add',
+                    elClassName: 'btn',
+                    type: 'button',
+                    action: () => {
+                        setAddRemove([...addRemove, false]);
+                        dispatch(addProjectMembers(employee.id));
+                    },
+                });
+            }
+        });
     }, [addRemove]);
 
     return (

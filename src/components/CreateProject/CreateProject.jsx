@@ -4,6 +4,7 @@ import Button from '../Elements/Button/Button';
 import ProjectInfo from './ProjectInfo';
 import { useUploadImageMutation } from '../../api/uplaodImage/uploadImageApiSlice';
 import { deleteAllProjectMembers } from '../../features/projects/projectsSlice';
+import { addProjectMembers } from '../../features/projects/projectsSlice';
 import { useAddProjectMutation } from '../../api/projects/projectsApiSlice';
 import { useGetFiltratedUsersQuery } from '../../api/userRole/userRoleApiSlice';
 import { useSelector, useDispatch } from 'react-redux/es/exports';
@@ -19,12 +20,24 @@ const CreateProject = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [projectName, setProjectName] = useState('');
-    const [projectDescription, setProjectDescription] = useState('');
+
     const [projectLogoFile, setProjectLogoFile] = useState();
-    const [logoId, setLogoId] = useState();
     const [employees, setEmployees] = useState([]);
     const [filter, setFilter] = useState();
+    const [newProjectDatas, setNewProjectDatas] = useState({
+        name: '',
+        employees: members,
+        logo: null,
+        description: '',
+        author: currentUserId,
+    });
+
+    useEffect(() => {
+        setNewProjectDatas({
+            ...newProjectDatas,
+            employees: members,
+        });
+    }, [members]);
 
     const [disabled, setDisabled] = useState(true);
 
@@ -38,7 +51,7 @@ const CreateProject = () => {
     ] = useAddProjectMutation();
     useEffect(() => {
         if (isProjectAdded) {
-            console.log('added');
+            dispatch(addProjectMembers(null));
             toast('Project successfully aded!');
         }
         if (isProjectFailed) {
@@ -79,23 +92,32 @@ const CreateProject = () => {
     };
     useEffect(() => {
         if (data) {
-            data.map((dataObj) => setLogoId(dataObj.id));
+            data.map((dataObj) =>
+                setNewProjectDatas({
+                    ...newProjectDatas,
+                    logo: dataObj.id,
+                })
+            );
         }
     }, [data]);
-
-    const newProjectDatas = {
-        data: {
-            name: projectName,
-            employees: members,
-            logo: logoId,
-            description: projectDescription,
-            author: currentUserId,
-        },
-    };
+    useEffect(() => {
+        if (
+            newProjectDatas.name &&
+            newProjectDatas.employees.length > 0 &&
+            newProjectDatas.logo &&
+            newProjectDatas.description
+        ) {
+            setDisabled(false);
+        } else {
+            setDisabled(true);
+        }
+    }, [newProjectDatas]);
 
     const newProjectSubmit = async () => {
+        const datas = { data: newProjectDatas };
+
         try {
-            await addProject(newProjectDatas);
+            await addProject(datas);
         } catch (err) {
             toast(err);
         }
@@ -110,37 +132,23 @@ const CreateProject = () => {
             newProjectSubmit();
         },
     };
-    console.log(buttonProps);
-    useEffect(() => {
-        if (
-            newProjectDatas.data.name &&
-            newProjectDatas.data.employees.length > 0 &&
-            newProjectDatas.data.logo &&
-            newProjectDatas.data.description
-        ) {
-            setDisabled(false);
-        } else {
-            setDisabled(true);
-        }
-    }, [newProjectDatas]);
+
     const projectInfoProps = {
-        projectName,
-        setProjectName,
-        projectDescription,
-        setProjectDescription,
-        projectLogoFile,
-        setProjectLogoFile,
+        newProjectDatas,
+        setNewProjectDatas,
         employees,
         formDataHandler,
-        filter,
         setFilter,
     };
 
     useEffect(() => {
         if (isProjectAdded) {
-            setProjectName('');
-            setProjectDescription('');
-            setEmployees([]);
+            setNewProjectDatas({
+                name: '',
+                employees: [],
+                logo: null,
+                description: '',
+            });
             dispatch(deleteAllProjectMembers([]));
             navigate('/');
         }

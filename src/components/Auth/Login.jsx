@@ -17,7 +17,6 @@ const Login = () => {
             data,
             isLoading,
             isSuccess: isLoginSuccess,
-            response,
             isError: isLoginError,
             error: loginError,
         },
@@ -36,15 +35,11 @@ const Login = () => {
         try {
             await login(datas);
         } catch (error) {
-            /*
             if (error.details.errors) {
-                console.log(error.details.errors);
                 error.details.errors.map((error) => toast.error(error));
             } else {
                 toast.error(error.data.message);
             }
-*/
-            // console.log(error);
         }
 
         setUsername('');
@@ -53,7 +48,6 @@ const Login = () => {
 
     useEffect(() => {
         if (isLoginSuccess) {
-            console.log(data);
             localStorage.setItem('token', data.jwt);
             dispatch(loginCredentials(data));
             toast('Login Success');
@@ -68,29 +62,15 @@ const Login = () => {
             }
         }
     }, [isLoginSuccess, isLoginError]);
-    /*
-    useEffect(() => {
-        if (isLoginError) {
-            toast(loginError.data.error.message);
-            console.log(loginError);
-        }
-    }, [isLoginError]);
-*/
-    /*
-    useEffect(() => {
-        if (loginSuccess) {
-            localStorage.setItem('token', data.jwt);
-            dispatch(loginCredentials(data));
-            toast('LogIn success!');
-        }
-        if (isLoginError) {
-            toast(loginError);
-        }
-    }, [loginSuccess, isLoginError]);
-    if (isLoading) {
+
+    const loading = () => {
         return <h2>Loading...</h2>;
-    }
-*/
+    };
+    useEffect(() => {
+        if (isLoading) {
+            loading();
+        }
+    }, [isLoading]);
     return (
         <section className={styles.authSection}>
             <form onSubmit={(e) => submitHandler(e)}>

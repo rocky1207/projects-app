@@ -6,12 +6,15 @@ import {
 } from '../../../features/searchProjects/searchProjectsSlice';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import PaginationInputField from './PaginationInputField';
 
 const Pagination = () => {
     const { maxPageNumber, pageNumber } = useSelector((state) => state.search);
     const dispatch = useDispatch();
     const [page, setPage] = useState(maxPageNumber + 1 - maxPageNumber);
-
+    useEffect(() => {
+        setPage(pageNumber);
+    }, [pageNumber]);
     const leftDoubleButton = {
         value: '<<',
         elClassName: 'paginationButton',
@@ -106,13 +109,15 @@ const Pagination = () => {
                             ...numberButton,
                             value: val,
                             disabled: val === page ? true : false,
-                            additionalElClassName: val === page ? 'bla' : null,
+                            additionalElClassName:
+                                val === page ? 'disabledButton' : null,
                         }}
                     ></Button>
                 );
             })}
             <Button props={rightButton}></Button>
             <Button props={rightDoubleButton}></Button>
+            <PaginationInputField />
         </div>
     );
 };

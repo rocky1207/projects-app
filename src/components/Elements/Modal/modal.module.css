@@ -1,0 +1,45 @@
+.modalBackground {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 3;
+    /*padding: 0 10px;*/
+}
+.modalArticle {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+    background-color: #212121;
+    padding: 30px 40px;
+    border-radius: 8px;
+    z-index: 4;
+}
+.modalArticle h3 {
+    margin-bottom: 10px;
+}
+.modalArticle p {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+@media screen and (min-width: 768px) {
+    .modalArticle {
+        width: 480px;
+        background-color: #212121;
+        padding: 30px 40px;
+    }
+    .modalArticle h3 {
+        font-size: 20px;
+    }
+    .modalArticle p {
+        font-size: 18px;
+    }
+    .confirmButtonsDiv {
+        padding: 0 40px;
+    }
+}

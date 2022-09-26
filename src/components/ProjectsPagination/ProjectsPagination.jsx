@@ -23,7 +23,6 @@ const ProjectsPagination = () => {
                                 maxPageNumber,
                             })
                         );
-                        console.log(e.target.innerText);
                     }}
                 />
             </div>

@@ -1,6 +1,7 @@
 .projectInfo {
     max-width: 90%;
-    margin: 40px auto;
+    margin: 0 auto 40px auto;
+    padding: 40px 0 0 0;
 }
 .projectInfoForm {
     width: 100%;
@@ -68,6 +69,7 @@
     outline: none;
     color: var(--white);
 }
+
 @media screen and (min-width: 767px) {
     .projectInfoDiv {
         display: flex;

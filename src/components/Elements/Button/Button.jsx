@@ -8,7 +8,7 @@ const Button = ({ props }) => {
     const type = props.type;
     const disabled = props.disabled;
     const action = props.action;
-    console.log(additionalElClassName);
+
     return (
         <button
             className={`${elClassName} ${additionalElClassName}`}

@@ -1,6 +1,7 @@
 .createProjectArticle {
     max-width: 90%;
-    margin: 40px auto;
+    margin: 0 auto;
+    padding-top: 40px;
 }
 .createProjectArticle img {
     height: 70px;

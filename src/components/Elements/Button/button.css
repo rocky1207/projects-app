@@ -2,6 +2,7 @@
     border: none;
     color: var(--white);
     margin-top: 10px;
+
     font-family: 'Roboto';
     background-color: #59942b;
     border-radius: 12px;
@@ -38,12 +39,38 @@
     padding: 5px;
     font-size: 16px;
 }
+.paginationButton:hover {
+    cursor: pointer;
+}
 .arrowButton {
     margin: 0 10px;
 }
-.bla {
+.disabledButton {
     font-size: 20px;
     font-weight: bold;
+}
+.editProjectButton {
+    margin: 0 0 40px 0;
+}
+.confirmButtons {
+    border: none;
+    padding: 8px 16px;
+    color: var(--white);
+}
+.confirmButtons:hover {
+    cursor: pointer;
+}
+.cancelButton {
+    background-color: #59942b;
+}
+.cancelButton:hover {
+    background-color: var(--button-green);
+}
+.deleteButton {
+    background-color: #fc030f;
+}
+.deleteButton:hover {
+    background-color: #fc2631;
 }
 @media screen and (min-width: 768px) {
     .button {
@@ -53,12 +80,19 @@
         padding: 4px 40px;
     }
     .paginationButton {
-        font-size: 24px;
+        font-size: 18px;
         margin: 0 6px;
         padding: 7px;
     }
-    .bla {
-        font-size: 34px;
+    .disabledButton {
+        font-size: 28px;
         font-weight: bold;
+    }
+    .editProjectButton {
+        margin: 0 0 40px 75px;
+    }
+    .confirmButtons {
+        padding: 10px 14px;
+        font-size: 18px;
     }
 }

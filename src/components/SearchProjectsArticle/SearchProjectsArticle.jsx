@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from '../Elements/Button/Button';
 import { searchProjects } from '../../features/searchProjects/searchProjectsSlice';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addProjectMembers } from '../../features/projects/projectsSlice';
 import { Link } from 'react-router-dom';
 
 import doc from '../../assets/icons/document.png';
@@ -10,6 +10,8 @@ import search from '../../assets/icons/search.png';
 import styles from './searchProjectsArticle.module.css';
 
 const SearchProjectsArticle = () => {
+    const { members } = useSelector((state) => state.projects);
+
     const dispatch = useDispatch();
 
     const [searchProjectsValue, setSearchProjectsValue] = useState('');
@@ -17,7 +19,12 @@ const SearchProjectsArticle = () => {
         value: '+ Add Project',
         elClassName: 'button',
     };
-
+    useEffect(() => {
+        if (members.length > 0) {
+            dispatch(addProjectMembers(null));
+        }
+        dispatch(searchProjects(searchProjectsValue));
+    }, [members]);
     useEffect(() => {
         dispatch(searchProjects(searchProjectsValue));
     }, [searchProjectsValue]);

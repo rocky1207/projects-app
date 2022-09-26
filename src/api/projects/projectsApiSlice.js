@@ -7,6 +7,7 @@ export const projectsApiSlice = apiSlice.injectEndpoints({
             query: () => ({
                 url: '/projects?populate=*',
             }),
+            providesTags: ['Projects'],
         }),
         projects: builder.query({
             query: (filterDatas) => ({
@@ -30,6 +31,12 @@ export const projectsApiSlice = apiSlice.injectEndpoints({
 */
             providesTags: ['Projects'],
         }),
+        getProjectById: builder.query({
+            query: (id) => ({
+                url: '/projects/' + id + '?populate=*',
+            }),
+            providesTags: ['Projects'],
+        }),
         addProject: builder.mutation({
             query: (datas) => ({
                 url: '/projects',
@@ -39,10 +46,28 @@ export const projectsApiSlice = apiSlice.injectEndpoints({
 
             invalidatesTags: ['Projects'],
         }),
+        editProject: builder.mutation({
+            query: ({ id, editProjectState }) => ({
+                url: '/projects/' + id,
+                method: 'PUT',
+                body: editProjectState,
+            }),
+            invalidatesTags: ['Projects'],
+        }),
+        deleteProject: builder.mutation({
+            query: (id) => ({
+                url: '/projects/' + id,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Projects'],
+        }),
     }),
 });
 export const {
     useProjectsQuery,
     useProjectsLengthQuery,
+    useGetProjectByIdQuery,
     useAddProjectMutation,
+    useEditProjectMutation,
+    useDeleteProjectMutation,
 } = projectsApiSlice;

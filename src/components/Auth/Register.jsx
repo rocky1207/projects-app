@@ -7,16 +7,27 @@ import { useNavigate } from 'react-router-dom';
 
 import { useRegisterMutation } from '../../api/registerUser/registerUserSlice';
 import { useUploadImageMutation } from '../../api/uplaodImage/uploadImageApiSlice';
+import { toast } from 'react-toastify';
 
 import styles from './Auth.module.css';
 
 const Register = () => {
     const navigate = useNavigate();
 
-    const [register, { isLoading, isSuccess }] = useRegisterMutation();
+    const [
+        register,
+        {
+            isLoading: registerLoading,
+            isSuccess: registerSuccess,
+            isError: registerError,
+            error: errorMsg,
+        },
+    ] = useRegisterMutation();
 
-    const [uploadImage, { data, isSuccess: uploadSuccess, isError, error }] =
-        useUploadImageMutation();
+    const [
+        uploadImage,
+        { data, isSuccess: uploadSuccess, error: uploadError },
+    ] = useUploadImageMutation();
 
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -49,11 +60,7 @@ const Register = () => {
             console.log(err);
         }
     };
-    useEffect(() => {
-        if (isSuccess) {
-            navigate('/');
-        }
-    }, [isSuccess]);
+
     useEffect(() => {
         if (username && email && password && passwordConfirm && image) {
             setDisabled(false);
@@ -86,7 +93,18 @@ const Register = () => {
             console.log(err);
         }
     };
+    useEffect(() => {
+        if (uploadError) {
+            toast(uploadError);
+        }
+    }, [uploadError]);
 
+    useEffect(() => {
+        if (registerSuccess) {
+            navigate('/');
+            toast('Register Success');
+        }
+    }, [registerSuccess]);
     useEffect(() => {
         if (data && uploadSuccess) {
             const id = data[0].id;
@@ -101,10 +119,20 @@ const Register = () => {
         }
     }, [uploadSuccess, data]);
 
-    if (isLoading) {
-        return <h2>Loading...</h2>;
-    }
+    useEffect(() => {
+        if (registerError) {
+            toast(errorMsg);
+        }
+    }, [registerError]);
 
+    const loadRegisterFunc = () => {
+        return <h2>Loading...</h2>;
+    };
+    useEffect(() => {
+        if (registerLoading) {
+            loadRegisterFunc();
+        }
+    }, [registerLoading]);
     return (
         <section className={styles.authSection}>
             <form onSubmit={(e) => registerHandler(e)}>
