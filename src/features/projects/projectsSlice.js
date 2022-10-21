@@ -9,7 +9,13 @@ const initialState = {
         projectDescription: '',
         employees: [],
     },
-    projectLogo: '',
+    projectInfo: {
+        id: null,
+        name: '',
+        description: '',
+        employees: {},
+        logo: '',
+    },
 };
 
 const projectsSlice = createSlice({
@@ -23,18 +29,10 @@ const projectsSlice = createSlice({
             if (!action.payload) {
                 state.members = [];
             } else {
-                //let bla = state.members;
-
-                //let blaBla = [];
-                // state.members = [...state.members, action.payload];
-
                 if (!state.members.includes(action.payload)) {
                     state.members = [...state.members, action.payload];
                 }
-
-                //state.members = [...state.members, action.payload];
             }
-            // console.log(state.members);
         },
         removeProjectMember: (state, action) => {
             state.members = state.members.filter(
@@ -66,7 +64,23 @@ const projectsSlice = createSlice({
                 });
         },
         projectLogoState: (state, action) => {
-            state.projectLogo = action.payload;
+            /*
+            state.projectInfo.id = action.payload.id;
+            state.projectInfo.name = action.payload.name;
+            state.projectInfo.description = action.payload.description;
+            state.projectInfo.employees = action.payload.employees;
+            state.projectInfo.logo = action.payload.logo;
+            */
+            state.projectInfo = {
+                id: action.payload.id,
+                name: action.payload.attributes.name,
+                description: action.payload.attributes.description,
+                employees: action.payload.attributes.employees,
+                logo: action.payload.attributes.logo.data.attributes.formats
+                    .thumbnail.url,
+            };
+
+            //state.projectLogo = action.payload;
         },
     },
 });

@@ -8,10 +8,10 @@
     width: 100%;
     color: white;
 }
-form {
+.authForm {
     width: 200px;
     margin: 0 auto;
-    padding: 30vh 0;
+    padding: 30vh 0 0 0;
 }
 .authInput {
     border-top: none;
@@ -30,7 +30,14 @@ form {
     padding: 4px 8px;
     margin: 10px auto;
 }
-
+.authFileInput {
+    margin-bottom: 10px;
+    width: 100%;
+}
+.authFileInput :hover {
+    cursor: pointer;
+}
+/*
 input[type='file'] {
     margin-bottom: 10px;
     width: 100%;
@@ -38,7 +45,7 @@ input[type='file'] {
 input[type='file'] :hover {
     cursor: pointer;
 }
-
+*/
 .submitRegisterForm {
     /*border: 1px solid white;*/
     width: 200px;

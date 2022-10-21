@@ -76,6 +76,9 @@
     .button {
         font-size: 18px;
     }
+    .buttonNote {
+        margin: 0;
+    }
     .btn {
         padding: 4px 40px;
     }

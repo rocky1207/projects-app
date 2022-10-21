@@ -135,7 +135,10 @@ const Register = () => {
     }, [registerLoading]);
     return (
         <section className={styles.authSection}>
-            <form onSubmit={(e) => registerHandler(e)}>
+            <form
+                className={styles.authForm}
+                onSubmit={(e) => registerHandler(e)}
+            >
                 <div>
                     <input
                         className={styles.authInput}
@@ -174,6 +177,7 @@ const Register = () => {
                 </div>
                 <div className={styles.uploadImageDiv}>
                     <input
+                        className={styles.authFileInput}
                         type="file"
                         onChange={(e) => {
                             formData.append('files', e.target.files[0]);

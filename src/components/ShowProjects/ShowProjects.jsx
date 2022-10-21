@@ -12,7 +12,7 @@ import ProjectsPagination from '../ProjectsPagination/ProjectsPagination';
 
 import { useDispatch, useSelector } from 'react-redux';
 import ProjectArticle from './ProjectArticle';
-import Modal from '../Elements/Modal/Modal';
+import DeleteProjectModal from '../Elements/Modals/DeleteProjectModal';
 import { toast } from 'react-toastify';
 
 import styles from './showProjects.module.css';
@@ -30,12 +30,11 @@ const ShowProjects = () => {
 
     useEffect(() => {
         const num = Math.ceil(projectsLength?.data?.length / 5);
-        console.log(num);
         dispatch(setPageNumber(1));
 
         dispatch(setMaxPageNumber(num));
     }, [projectsLength]);
-    console.log(projectsLength);
+
     const { filterParams, pageNumber } = useSelector((state) => state.search);
 
     const filterDatas = {
@@ -60,7 +59,6 @@ const ShowProjects = () => {
         }
 
         if (projectsLoading) {
-            console.log('loading');
             projectsLoadingReturn();
         }
     }, [isProjectsError, projectsLoading]);
@@ -68,10 +66,10 @@ const ShowProjects = () => {
     return (
         <section className="app">
             {showModal.showModal ? (
-                <Modal
+                <DeleteProjectModal
                     showModal={showModal}
                     setShowModal={setShowModal}
-                ></Modal>
+                ></DeleteProjectModal>
             ) : null}
             <SearchProjectsArticle />
             <div className={styles.projectsDiv}>

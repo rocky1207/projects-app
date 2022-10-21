@@ -55,7 +55,7 @@ const ProjectArticle = ({ project, showModalFunc, showModal }) => {
                         alt="ProjectLogo"
                         onClick={() => {
                             navigate('/project/' + project.id);
-                            dispatch(projectLogoState(projectLogo));
+                            dispatch(projectLogoState(project));
                         }}
                     />
                 </figure>

@@ -23,7 +23,13 @@ body {
     flex-wrap: wrap;
 }
 
-@media screen and (min-width: 1144px) {
+@media screen and (min-width: 1144px) and (max-width: 1250px) {
+    .app {
+        max-width: 1144px;
+        margin-left: 100px;
+    }
+}
+@media screen and (min-width: 1251px) {
     .app {
         max-width: 1144px;
         margin: 0 auto;

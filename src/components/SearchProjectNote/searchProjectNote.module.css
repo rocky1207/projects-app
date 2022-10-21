@@ -1,5 +1,184 @@
-.projectLogoFigure img {
+.searchNotesSection {
+    padding: 24px 20px;
+}
+.searchNotesFlexDiv {
+    flex-direction: column;
+    align-items: flex-start;
+}
+.projectLogoForm {
+    margin: 0 0 20px 0;
+}
+.projectLogoForm h2 {
+    margin-bottom: 5px;
+}
+.projectLogoForm p {
+    cursor: pointer;
+}
+.projectLogoDiv {
+    position: relative;
+}
+
+.projectLogoFigure {
+    width: 94px;
+    position: relative;
+}
+.staff {
+    width: 250px;
+    margin: 20px 0 40px 0;
+}
+.staff h3 {
+    margin-bottom: 5px;
+}
+
+.editLogoInput {
+    position: absolute;
+    top: 50%;
+    left: 3%;
+    transform: translate(0, -50%);
+    z-index: 6;
+    height: 94px;
+    width: 94px;
+    opacity: -1;
+    display: block;
+    border-radius: 50%;
+}
+
+.projectLogoFigure:hover {
+    cursor: pointer;
+}
+
+.projectLogoImg {
     width: 94px;
     height: 94px;
     border-radius: 50%;
+}
+
+.editProjectLogoImg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    transform: translate(-50%, -50%);
+}
+.figure img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+}
+
+.employeeImgFigure img {
+    margin-left: -30px;
+}
+.employeeImgFigure img:first-child {
+    margin-left: 0;
+}
+.employeesSpan {
+    display: inline-block;
+}
+/**********
+Categories
+***********/
+.addNoteDiv {
+    margin: 0 0 50px 0;
+}
+.categories {
+    border: 1px solid var(--white);
+    border-radius: 12px;
+    padding: 10px;
+    color: var(--text-primary-color);
+    list-style-type: none;
+    width: 260px;
+    margin: 0 0 40px 0;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.liMarked {
+    color: var(--white);
+}
+.categories li:hover {
+    cursor: pointer;
+    color: var(--white);
+}
+.searchInputDiv img {
+    width: 30px;
+    height: 30px;
+    margin-bottom: -5px;
+}
+.searchInputDiv input {
+    background: none;
+    border: none;
+    border-bottom: 2px solid var(--white);
+    width: 220px;
+    margin-left: 10px;
+    outline: none;
+    color: var(--white);
+    font-size: 20px;
+}
+.searchInputDiv input::placeholder {
+    font-size: 16px;
+}
+
+@media screen and (min-width: 500px) and (max-width: 767px) {
+}
+@media screen and (min-width: 768px) {
+    .searchNotesFlexDiv {
+        flex-direction: row;
+        align-items: flex-end;
+        margin: 0 0 50px 0;
+    }
+    .projectLogoForm {
+        flex-basis: 300px;
+    }
+    .editLogoInput {
+        left: 1%;
+        transform: translate(0, -50%);
+
+        /*  opacity: 0;*/
+        cursor: pointer;
+        display: block;
+    }
+    .projectLogoForm h2 {
+        font-size: 28px;
+    }
+    .projectLogoForm p {
+        font-size: 20px;
+    }
+    .staff {
+        width: 400px;
+        margin: 0 0 0 -30px;
+        padding-top: 30px;
+    }
+    .staff h3 {
+        font-size: 20px;
+    }
+
+    /**********
+Categories
+***********/
+
+    .categories {
+        width: 60%;
+        margin: 0 0 40px 0;
+        padding: 10px 20px;
+        flex-direction: row;
+        align-items: center;
+        margin: 0;
+        font-size: 18px;
+    }
+    .searchInputDiv img {
+        width: 40px;
+        height: 40px;
+        margin-bottom: -5px;
+    }
+    .searchInputDiv input {
+        background: none;
+        border: none;
+        border-bottom: 2px solid var(--white);
+        width: 350px;
+        line-height: 20px;
+    }
+    .searchInputDiv input::placeholder {
+        font-size: 18px;
+    }
 }

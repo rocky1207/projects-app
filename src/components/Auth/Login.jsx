@@ -73,7 +73,10 @@ const Login = () => {
     }, [isLoading]);
     return (
         <section className={styles.authSection}>
-            <form onSubmit={(e) => submitHandler(e)}>
+            <form
+                className={styles.authForm}
+                onSubmit={(e) => submitHandler(e)}
+            >
                 <div>
                     <input
                         className={styles.authInput}
