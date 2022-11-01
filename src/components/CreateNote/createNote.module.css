@@ -65,6 +65,8 @@ Notes
 ****************/
 .notesSection {
     margin: 40px 0;
+    align-items: flex-start;
+    flex-direction: column;
 }
 .noteArticle {
     width: 280px;
@@ -76,7 +78,9 @@ Notes
 }
 .noteTitleDiv h3 {
     color: var(--black);
-    font-size: 14px;
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 8px;
 }
 .editRemoveFigure img {
     width: 20px;
@@ -130,5 +134,55 @@ Notes
     .textAreaDiv textarea {
         height: 150px;
         font-size: 20px;
+    }
+    /***********
+Notes
+****************/
+    .notesSection {
+        max-width: 930px;
+        margin: 40px 0 0 0;
+
+        flex-direction: row;
+    }
+
+    .noteArticle {
+        width: 430px;
+        padding: 15px;
+    }
+    .noteTitleDiv h3 {
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 28px;
+        margin-bottom: 12px;
+    }
+    .editRemoveFigure img {
+        width: 30px;
+        height: 30px;
+    }
+    .noteArticle p {
+        font-size: 18px;
+        line-height: 21px;
+        margin-bottom: 15px;
+    }
+    .docFigure img {
+        height: 32px;
+    }
+    .avatarFigure img {
+        height: 32px;
+        width: 32px;
+
+        margin: 0 10px 0 0;
+    }
+    .avatarDiv {
+        margin-top: 10px;
+    }
+    .avatarUsername {
+        margin: 0 !important;
+    }
+    .avatarEmail {
+        margin-left: 20px;
+    }
+    .avatarEmail .avatarUsername {
+        font-size: 14px;
     }
 }

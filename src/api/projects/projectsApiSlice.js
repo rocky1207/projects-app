@@ -4,8 +4,14 @@ export const projectsApiSlice = apiSlice.injectEndpoints({
     tagTypes: ['Projects'],
     endpoints: (builder) => ({
         projectsLength: builder.query({
-            query: () => ({
-                url: '/projects?populate=*',
+            query: (currentUserId) => ({
+                url:
+                    '/projects?filters[$or][0][employees][id][$eq]=' +
+                    currentUserId +
+                    '&filters[$or][1][author][id][$eq]=' +
+                    currentUserId,
+
+                //filters[$or][0][employees][id][$eq]=4&filters[$or][1][author][id][$eq]=4
             }),
             providesTags: ['Projects'],
         }),

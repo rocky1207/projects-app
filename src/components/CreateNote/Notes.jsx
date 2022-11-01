@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useDeleteNoteMutation } from '../../api/notes/notesApiSlice';
 import DeletetNoteModal from '../Elements/Modals/DeleteNoteModal';
@@ -7,16 +7,15 @@ import noteDoc from '../../assets/icons/note.png';
 import edit from '../../assets/icons/edit-button.png';
 import remove from '../../assets/icons/close-button.png';
 import defaultAvatar from '../../assets/icons/defaultAvatad.jpg';
-
-import styles from './createNote.module.css';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
+
+import styles from './createNote.module.css';
 
 const Notes = ({ notes }) => {
     const { avatar } = useSelector((state) => state.projects);
     const api_url = 'http://localhost:1337';
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     const [showModal, setShowModal] = useState({
         noteId: null,
@@ -92,14 +91,14 @@ const Notes = ({ notes }) => {
                                     alt="Avatar"
                                 />
                             </figure>
-                            <p>
+                            <p className={styles.avatarUsername}>
                                 {
                                     note.attributes.author.data.attributes
                                         .username
                                 }
                             </p>
-                            <div>
-                                <p>
+                            <div className={styles.avatarEmail}>
+                                <p className={styles.avatarUsername}>
                                     {
                                         note.attributes.author.data.attributes
                                             .email

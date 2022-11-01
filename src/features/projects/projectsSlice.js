@@ -91,6 +91,7 @@ export const {
     removeProjectMember,
     deleteAllProjectMembers,
     editProject,
+    isProjectEdited,
     projectLogoState,
 } = projectsSlice.actions;
 

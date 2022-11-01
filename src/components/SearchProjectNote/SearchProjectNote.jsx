@@ -17,15 +17,22 @@ import { useEffect, useState } from 'react';
 
 const SearchProjectNote = () => {
     const { projectInfo, avatar } = useSelector((state) => state.projects);
+    const { categoryId } = useSelector((state) => state.categories);
+
     const [editLogo, setEditLogo] = useState(null);
+    const [criteria, setCriteria] = useState('');
+    const [cat, setCat] = useState(categoryId);
     const [showProjectDescriptionModal, setShowDescriptionModal] = useState({
         show: false,
         description: '',
     });
-
+    useEffect(() => {
+        setCat(categoryId);
+    }, [categoryId]);
     const { data: notes } = useGetNotesQuery({
         id: projectInfo.id,
-        criteria: '',
+        criteria: criteria,
+        categoryId: cat,
     });
 
     const [
@@ -108,7 +115,10 @@ const SearchProjectNote = () => {
                     projectInfo={projectInfo}
                 ></ProjectDescriptionModal>
             ) : null}
-            <Categories></Categories>
+            <Categories
+                criteria={criteria}
+                setCriteria={setCriteria}
+            ></Categories>
             <Notes notes={notes}></Notes>
         </section>
     );

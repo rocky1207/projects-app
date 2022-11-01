@@ -4,10 +4,12 @@ export const notesApiSlice = apiSlice.injectEndpoints({
     tagTypes: ['Notes'],
     endpoints: (builder) => ({
         getNotes: builder.query({
-            query: ({ id, criteria }) => ({
+            query: ({ id, criteria, categoryId }) => ({
                 url:
-                    '/notes?populate[author][populate][logo][populate]=*&populate[files][populate]=*&populate[category][populate]=*&populate[project][populate]=*&filters[project][id][$eq]=' +
+                    '/notes?populate[author][populate][logo][populate]=*&populate[files][populate]=*&populate[category][populate]=&populate[project][populate]=*&filters[project][id][$eq]=' +
                     id +
+                    '&filters[category][id][$eq]=' +
+                    categoryId +
                     '&filters[title][$contains]=' +
                     criteria,
             }),

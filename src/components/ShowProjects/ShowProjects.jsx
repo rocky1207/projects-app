@@ -24,7 +24,7 @@ const ShowProjects = () => {
 
     const dispatch = useDispatch();
 
-    const { data: projectsLength } = useProjectsLengthQuery();
+    const { data: projectsLength } = useProjectsLengthQuery(currentUserId);
 
     const [showModal, setShowModal] = useState({ showModal: false, id: null });
 

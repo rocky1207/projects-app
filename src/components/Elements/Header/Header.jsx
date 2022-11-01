@@ -26,7 +26,6 @@ const Header = () => {
                 <figure
                     className={styles.logoFigure}
                     onClick={() => {
-                        dispatch(logOut());
                         navigate('/');
                     }}
                 >

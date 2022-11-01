@@ -10,7 +10,7 @@ import searchButton from '../../assets/icons/search.png';
 
 import styles from './searchProjectNote.module.css';
 
-const Categories = () => {
+const Categories = ({ criteria, setCriteria }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [categories, setCategories] = useState([]);
@@ -77,7 +77,12 @@ const Categories = () => {
             </div>
             <div className={styles.searchInputDiv}>
                 <img src={searchButton} alt="Search Note" />
-                <input type="text" placeholder="Search for Notes" />
+                <input
+                    value={criteria}
+                    type="text"
+                    placeholder="Search for Notes"
+                    onChange={(e) => setCriteria(e.target.value)}
+                />
             </div>
         </>
     );

@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import FiltratedUsers from '../FiltratedUsers/FiltratedUsers';
 import { useGetFiltratedUsersQuery } from '../../api/userRole/userRoleApiSlice';
 import Button from '../Elements/Button/Button';
+
+import { toast } from 'react-toastify';
 import styles from './projectInfo.module.css';
 
 const EditProject = () => {
@@ -64,27 +66,29 @@ const EditProject = () => {
         });
     }, [members]);
 
-    const [editProject, { isSuccess, error }] = useEditProjectMutation();
+    const [editProject, { isSuccess: isEditSuccess, error: editError }] =
+        useEditProjectMutation();
     const sendUpdatedDatas = async () => {
-        const ha = {
+        const datasToUpdate = {
             id: projectId,
             editProjectState: { data: editProjectState },
         };
         try {
-            console.log(ha);
-
-            const bla = await editProject(ha);
-            console.log(bla);
-        } catch (err) {
-            console.log(err);
+            await editProject(datasToUpdate);
+        } catch (error) {
+            console.log(error.data.message);
         }
     };
-    if (error) {
-        console.log(error);
-    }
-    if (isSuccess) {
-        console.log('ne verujem');
-    }
+    useEffect(() => {
+        if (isEditSuccess) {
+            navigate('/');
+            toast.success('Project successfuly edited');
+        }
+        if (editError) {
+            navigate('/');
+            toast.error(editError.data.message);
+        }
+    }, [isEditSuccess, editError]);
     const buttonProps = {
         value: 'Edit',
         elClassName: 'button',
@@ -92,7 +96,6 @@ const EditProject = () => {
         type: 'button',
         action: () => {
             sendUpdatedDatas();
-            navigate('/');
         },
     };
 

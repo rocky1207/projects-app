@@ -4,14 +4,15 @@ import {
     getPageNumber,
     incPageNumber,
 } from '../../../features/searchProjects/searchProjectsSlice';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+
 import PaginationInputField from './PaginationInputField';
 
 const Pagination = () => {
     const { maxPageNumber, pageNumber } = useSelector((state) => state.search);
     const dispatch = useDispatch();
     const [page, setPage] = useState(maxPageNumber + 1 - maxPageNumber);
+
     useEffect(() => {
         setPage(pageNumber);
     }, [pageNumber]);
@@ -79,7 +80,11 @@ const Pagination = () => {
     };
 
     let projects = [];
-    if (pageNumber <= 3) {
+    if (/*pageNumber <= 3*/ maxPageNumber <= 5) {
+        for (let i = 1; i <= maxPageNumber; i++) {
+            projects.push(i);
+        }
+    } else if (pageNumber <= 3) {
         for (let i = 1; i <= 5; i++) {
             projects.push(i);
         }

@@ -9,7 +9,7 @@ body {
     font-style: normal;
     color: white;
     min-height: 100vh;
-    min-width: 100vw;
+    /* min-width: 100vw;*/
     background: rgba(30, 30, 30, 0.9);
     position: relative;
 }
