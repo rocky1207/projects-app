@@ -10,7 +10,7 @@ import searchButton from '../../assets/icons/search.png';
 
 import styles from './searchProjectNote.module.css';
 
-const Categories = ({ criteria, setCriteria }) => {
+const Categories = ({ criteria, setCriteria, role }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [categories, setCategories] = useState([]);
@@ -73,7 +73,9 @@ const Categories = ({ criteria, setCriteria }) => {
                         );
                     })}
                 </ul>
-                <Button props={buttonProps}></Button>
+                {role === 'ProjectManager' ? (
+                    <Button props={buttonProps}></Button>
+                ) : null}
             </div>
             <div className={styles.searchInputDiv}>
                 <img src={searchButton} alt="Search Note" />

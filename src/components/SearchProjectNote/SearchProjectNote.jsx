@@ -18,6 +18,7 @@ import { useEffect, useState } from 'react';
 const SearchProjectNote = () => {
     const { projectInfo, avatar } = useSelector((state) => state.projects);
     const { categoryId } = useSelector((state) => state.categories);
+    const { role } = useSelector((state) => state.role);
 
     const [editLogo, setEditLogo] = useState(null);
     const [criteria, setCriteria] = useState('');
@@ -98,6 +99,7 @@ const SearchProjectNote = () => {
                 setShowDescriptionModal={setShowDescriptionModal}
                 projectInfo={projectInfo}
                 avatar={avatar}
+                role={role}
             ></EditLogo>
             {showModal.showModal ? (
                 <EditProjectLogoModal
@@ -118,8 +120,9 @@ const SearchProjectNote = () => {
             <Categories
                 criteria={criteria}
                 setCriteria={setCriteria}
+                role={role}
             ></Categories>
-            <Notes notes={notes}></Notes>
+            <Notes notes={notes} role={role}></Notes>
         </section>
     );
 };

@@ -95,6 +95,9 @@ Notes
     line-height: 18px;
     color: #717171;
 }
+.description {
+    cursor: pointer;
+}
 .docFigure img {
     height: 25px;
 }

@@ -3,14 +3,18 @@ import SvgSettings from '../../../iconComponents/SvgSettings';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { logOut } from '../../../../features/auth/authSlice';
+
 import defalutAvatar from '../../../../assets/icons/defaultAvatad.jpg';
 import styles from './dropDovnMenu.module.css';
+import { roleOn } from '../../../../features/role/roleSlice';
+import { useNavigate } from 'react-router-dom';
 
 const DropDownMenu = () => {
     const author = useSelector((state) => state.projects.avatar);
 
     const api_url = 'http://localhost:1337';
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     return (
         <nav className={styles.dropDownMenu}>
@@ -38,7 +42,14 @@ const DropDownMenu = () => {
                     <span className={styles.dropDownSpan}>
                         <SvgLogout
                             background={'#fff'}
-                            onClick={() => dispatch(logOut())}
+                            onClick={() => {
+                                dispatch(logOut());
+
+                                window.location.reload(true);
+
+                                roleOn('');
+                                navigate('/');
+                            }}
                         />
                     </span>
                     Logout

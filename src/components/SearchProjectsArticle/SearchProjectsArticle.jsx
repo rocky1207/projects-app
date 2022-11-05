@@ -8,11 +8,13 @@ import { Link } from 'react-router-dom';
 import doc from '../../assets/icons/document.png';
 import search from '../../assets/icons/search.png';
 import styles from './searchProjectsArticle.module.css';
+import { useUserRoleQuery } from '../../api/userRole/userRoleApiSlice';
 
-const SearchProjectsArticle = () => {
+const SearchProjectsArticle = ({ role }) => {
     const { members } = useSelector((state) => state.projects);
 
     const dispatch = useDispatch();
+    const { data: roleData, isSuccess: isRoleDataSuccess } = useUserRoleQuery();
 
     const [searchProjectsValue, setSearchProjectsValue] = useState('');
     const buttonProps = {
@@ -47,9 +49,11 @@ const SearchProjectsArticle = () => {
                     onChange={(e) => setSearchProjectsValue(e.target.value)}
                 />
             </div>
-            <Link to="create-project">
-                <Button props={buttonProps}></Button>
-            </Link>
+            {role === 'ProjectManager' ? (
+                <Link to="create-project">
+                    <Button props={buttonProps}></Button>
+                </Link>
+            ) : null}
         </article>
     );
 };

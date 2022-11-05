@@ -27,6 +27,7 @@ const CreateNoteForm = ({ note, setNote, select, setSelect }) => {
         select: select,
         action: selectChangeFunc,
     };
+    console.log(note);
     return (
         <form className={`flex ${styles.createNoteForm}`}>
             <h2>Project Info</h2>

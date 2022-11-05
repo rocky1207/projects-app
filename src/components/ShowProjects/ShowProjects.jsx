@@ -9,11 +9,13 @@ import {
 } from '../../features/searchProjects/searchProjectsSlice';
 import SearchProjectsArticle from '../SearchProjectsArticle/SearchProjectsArticle';
 import ProjectsPagination from '../ProjectsPagination/ProjectsPagination';
-
+import { useUserRoleQuery } from '../../api/userRole/userRoleApiSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import ProjectArticle from './ProjectArticle';
 import DeleteProjectModal from '../Elements/Modals/DeleteProjectModal';
 import { toast } from 'react-toastify';
+
+import { roleOn } from '../../features/role/roleSlice';
 
 import styles from './showProjects.module.css';
 import '../../App.css';
@@ -22,11 +24,18 @@ import { useState } from 'react';
 const ShowProjects = () => {
     const { currentUserId } = useSelector((state) => state.auth);
 
+    const { data: roleData, isSuccess: isRoleDataSuccess } = useUserRoleQuery();
     const dispatch = useDispatch();
 
     const { data: projectsLength } = useProjectsLengthQuery(currentUserId);
-
+    const [role, setRole] = useState('');
     const [showModal, setShowModal] = useState({ showModal: false, id: null });
+
+    useEffect(() => {
+        setRole(roleData?.role?.name);
+
+        dispatch(roleOn(roleData?.role?.name));
+    }, [isRoleDataSuccess]);
 
     useEffect(() => {
         const num = Math.ceil(projectsLength?.data?.length / 5);
@@ -71,7 +80,7 @@ const ShowProjects = () => {
                     setShowModal={setShowModal}
                 ></DeleteProjectModal>
             ) : null}
-            <SearchProjectsArticle />
+            <SearchProjectsArticle role={role} />
             <div className={styles.projectsDiv}>
                 {projects?.data.map((project) => {
                     return (
@@ -80,6 +89,7 @@ const ShowProjects = () => {
                             project={project}
                             showModalFunc={setShowModal}
                             showModal={showModal}
+                            role={role}
                         />
                     );
                 })}

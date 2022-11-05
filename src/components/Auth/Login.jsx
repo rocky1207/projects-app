@@ -79,6 +79,7 @@ const Login = () => {
             >
                 <div>
                     <input
+                        value={username}
                         className={styles.authInput}
                         type="text"
                         placeholder="Username"
@@ -88,7 +89,8 @@ const Login = () => {
                 <div>
                     <input
                         className={styles.authInput}
-                        type="text"
+                        value={password}
+                        type="password"
                         placeholder="Password"
                         onChange={(e) => setPassword(e.target.value)}
                     />

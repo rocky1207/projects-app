@@ -11,7 +11,7 @@ import styles from './showProjects.module.css';
 import '../../App.css';
 import '../../theme.module.css';
 
-const ProjectArticle = ({ project, showModalFunc, showModal }) => {
+const ProjectArticle = ({ project, showModalFunc, role = { role } }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -88,23 +88,28 @@ const ProjectArticle = ({ project, showModalFunc, showModal }) => {
                 className={`flex
         ${styles.removeEditDiv}`}
             >
-                <div className={styles.removeEdit}>
-                    <img
-                        src={edit}
-                        alt="edit"
-                        onClick={() => {
-                            navigate(`/edit-project/${project.id}`);
-                            callPut(project.id);
-                        }}
-                    />
-                    <img
-                        src={remove}
-                        alt="remove"
-                        onClick={() =>
-                            showModalFunc({ showModal: true, id: project.id })
-                        }
-                    />
-                </div>
+                {role === 'ProjectManager' ? (
+                    <div className={styles.removeEdit}>
+                        <img
+                            src={edit}
+                            alt="edit"
+                            onClick={() => {
+                                navigate(`/edit-project/${project.id}`);
+                                callPut(project.id);
+                            }}
+                        />
+                        <img
+                            src={remove}
+                            alt="remove"
+                            onClick={() =>
+                                showModalFunc({
+                                    showModal: true,
+                                    id: project.id,
+                                })
+                            }
+                        />
+                    </div>
+                ) : null}
                 <p>
                     <span>{numOfEmployees}</span> employees
                 </p>

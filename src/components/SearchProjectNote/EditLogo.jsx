@@ -8,7 +8,6 @@ import { toast } from 'react-toastify';
 import styles from './searchProjectNote.module.css';
 
 const EditLogo = ({
-    showModal,
     setShowModal,
     editLogo,
     setEditLogo,
@@ -16,6 +15,7 @@ const EditLogo = ({
     setShowDescriptionModal,
     projectInfo,
     avatar,
+    role,
 }) => {
     const api_url = 'http://localhost:1337';
 
@@ -82,21 +82,25 @@ const EditLogo = ({
         <div className={`flex ${styles.searchNotesFlexDiv}`}>
             <form className={styles.projectLogoForm} onSubmit={uplaodImageFunc}>
                 <label className={styles.projectLogoDiv} htmlFor="">
-                    <input
-                        className={styles.editLogoInput}
-                        type="file"
-                        onChange={(e) => {
-                            formData.append('files', e.target.files[0]);
+                    {role === 'ProjectManager' ? (
+                        <input
+                            className={styles.editLogoInput}
+                            type="file"
+                            onChange={(e) => {
+                                formData.append('files', e.target.files[0]);
 
-                            setEditLogo(formData);
-                        }}
-                    />
-                    <figure className={styles.projectLogoFigure}>
-                        <img
-                            className={styles.editProjectLogoImg}
-                            src={editButton}
-                            alt="Edit Logo"
+                                setEditLogo(formData);
+                            }}
                         />
+                    ) : null}
+                    <figure className={styles.projectLogoFigure}>
+                        {role === 'ProjectManager' ? (
+                            <img
+                                className={styles.editProjectLogoImg}
+                                src={editButton}
+                                alt="Edit Logo"
+                            />
+                        ) : null}
 
                         <img
                             className={styles.projectLogoImg}

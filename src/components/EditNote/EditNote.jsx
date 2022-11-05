@@ -45,12 +45,12 @@ const EditNote = () => {
     const { data: getNoteData, error } = useGetNoteByIdQuery(
         parseInt(params.id)
     );
-
+    console.log(getNoteData);
     useEffect(() => {
         if (getNoteData) {
             setNote({
                 noteTitle: getNoteData?.data?.attributes?.title,
-                noteDescription: getNoteData?.data?.attributes?.title,
+                noteDescription: getNoteData?.data?.attributes?.description,
                 /*
                 imageState: getNoteData?.data?.attributes?.files?.data
                     ? getNoteData?.data?.attributes?.files?.data[0]?.id

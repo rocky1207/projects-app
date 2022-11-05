@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CreateNoteForm from './CreateNoteForm';
 
 import { createNoteFunc } from './createNoteFunctions/createNoteFunc';
@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 import '../../App.css';
 import styles from './createNote.module.css';
-import { useEffect } from 'react';
+
 import { toast } from 'react-toastify';
 
 const CreateNote = () => {

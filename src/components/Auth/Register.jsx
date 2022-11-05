@@ -94,17 +94,15 @@ const Register = () => {
         }
     };
     useEffect(() => {
-        if (uploadError) {
-            toast(uploadError);
-        }
-    }, [uploadError]);
-
-    useEffect(() => {
         if (registerSuccess) {
             navigate('/');
-            toast('Register Success');
+            toast.success('Register Success');
         }
-    }, [registerSuccess]);
+        if (uploadError) {
+            toast.error(uploadError.message);
+        }
+    }, [uploadError, registerSuccess]);
+
     useEffect(() => {
         if (data && uploadSuccess) {
             const id = data[0].id;
@@ -161,7 +159,7 @@ const Register = () => {
                     <input
                         className={styles.authInput}
                         value={password}
-                        type="text"
+                        type="password"
                         placeholder="Password"
                         onChange={(e) => setPassword(e.target.value)}
                     />
@@ -170,7 +168,7 @@ const Register = () => {
                     <input
                         className={styles.authInput}
                         value={passwordConfirm}
-                        type="text"
+                        type="password"
                         placeholder="Confirm password"
                         onChange={(e) => setPasswordConfirm(e.target.value)}
                     />

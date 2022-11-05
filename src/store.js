@@ -4,7 +4,7 @@ import searchReducer from './features/searchProjects/searchProjectsSlice';
 import projectsReducer from './features/projects/projectsSlice';
 import categoryReducer from './features/categories/categoriesSlice';
 import notesReducer from './features/notes/notesSlice';
-
+import roleReducer from './features/role/roleSlice';
 import { combineReducers } from '@reduxjs/toolkit';
 import { apiSlice } from './api/apiSlice';
 
@@ -33,6 +33,7 @@ const reducer = combineReducers({
     search: searchReducer,
     categories: categoryReducer,
     notes: notesReducer,
+    role: roleReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
 });
 
