@@ -3,7 +3,6 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    /*width: 100%;*/
     height: 100vh;
     width: 100%;
     color: white;
@@ -37,17 +36,7 @@
 .authFileInput :hover {
     cursor: pointer;
 }
-/*
-input[type='file'] {
-    margin-bottom: 10px;
-    width: 100%;
-}
-input[type='file'] :hover {
-    cursor: pointer;
-}
-*/
 .submitRegisterForm {
-    /*border: 1px solid white;*/
     width: 200px;
     padding: 4px 8px;
     margin: 20px 0;

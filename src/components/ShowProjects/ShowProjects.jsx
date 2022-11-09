@@ -88,7 +88,6 @@ const ShowProjects = () => {
                             key={project.id}
                             project={project}
                             showModalFunc={setShowModal}
-                            showModal={showModal}
                             role={role}
                         />
                     );

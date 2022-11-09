@@ -37,23 +37,9 @@ const reducer = combineReducers({
     [apiSlice.reducerPath]: apiSlice.reducer,
 });
 
-const persistedReducer = persistReducer(
-    persistConfig,
-    reducer
-    //authReducer
-    //projectsReducer
-);
+const persistedReducer = persistReducer(persistConfig, reducer);
 
 export const store = configureStore({
-    /*
-    reducer: {
-        auth: persistedReducer,
-        search: searchReducer,
-        projects: projectsReducer,
-
-        [apiSlice.reducerPath]: apiSlice.reducer,
-    },
-*/
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({

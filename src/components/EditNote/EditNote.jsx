@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import EditNoteForm from './EditNoteForm';
-
+import { noteEdit } from '../../features/notes/notesSlice';
 import { editNoteFunc } from '../CreateNote/createNoteFunctions/createNoteFunc';
 import Button from '../Elements/Button/Button';
 import doc from '../../assets/icons/document.png';
@@ -8,6 +8,7 @@ import { useGetNoteByIdQuery } from '../../api/notes/notesApiSlice';
 import { useEditNoteMutation } from '../../api/notes/notesApiSlice';
 import { useUploadImageMutation } from '../../api/uplaodImage/uploadImageApiSlice';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -20,6 +21,10 @@ const EditNote = () => {
     const params = useParams();
     const { currentUserId } = useSelector((state) => state.auth);
     const { projectInfo } = useSelector((state) => state.projects);
+
+    const dispatch = useDispatch();
+    const [categoriesDataState, setCategoriesDataState] = useState([]);
+
     const [paramsId, setParamsId] = useState(parseInt(params.id));
     const [select, setSelect] = useState(1);
     const [selectProps, setSelectProps] = useState({
@@ -36,41 +41,41 @@ const EditNote = () => {
         imageState: null,
         categoryId: '',
     });
-    const {
-        data: categoriesData,
-        isSuccess: categoriesSuccess,
-        error: categoriesError,
-    } = useGetCategoriesQuery();
 
-    const { data: getNoteData, error } = useGetNoteByIdQuery(
-        parseInt(params.id)
-    );
-    console.log(getNoteData);
+    const { data: categoriesData, isSuccess: categoriesSuccess } =
+        useGetCategoriesQuery();
+
+    useEffect(() => {
+        if (categoriesSuccess) {
+            setCategoriesDataState(categoriesData?.data);
+        }
+    }, [categoriesSuccess]);
+    const { data: getNoteData } = useGetNoteByIdQuery(parseInt(params.id));
+
     useEffect(() => {
         if (getNoteData) {
             setNote({
                 noteTitle: getNoteData?.data?.attributes?.title,
                 noteDescription: getNoteData?.data?.attributes?.description,
-                /*
-                imageState: getNoteData?.data?.attributes?.files?.data
-                    ? getNoteData?.data?.attributes?.files?.data[0]?.id
-                    : null,
-                    */
                 imageState: null,
                 categoryId: getNoteData?.data?.attributes?.category?.data.id,
             });
+
+            dispatch(
+                noteEdit({
+                    noteTitle: getNoteData?.data?.attributes?.title,
+                    noteDescription: getNoteData?.data?.attributes?.description,
+                    imageState: null,
+                    categoryId:
+                        getNoteData?.data?.attributes?.category?.data.id,
+                })
+            );
             setSelect(getNoteData?.data?.attributes?.category?.data.id);
         }
     }, [getNoteData]);
 
-    const [
-        editNote,
-        {
-            data: editNoteData,
-            isSuccess: isEditNoteSuccess,
-            error: editNoteError,
-        },
-    ] = useEditNoteMutation();
+    const [editNote, { isSuccess: isEditNoteSuccess, error: editNoteError }] =
+        useEditNoteMutation();
 
     const [
         uploadImage,
@@ -95,12 +100,14 @@ const EditNote = () => {
     }, [uploadImageDataSuccess, uploadImageError]);
     useEffect(() => {
         if (isEditNoteSuccess) {
-            setNote({
-                noteTitle: '',
-                noteDescription: '',
-                imageState: null,
-                categoryId: null,
-            });
+            dispatch(
+                noteEdit({
+                    noteTitle: '',
+                    noteDescription: '',
+                    imageState: null,
+                    categoryId: null,
+                })
+            );
             navigate(`/project/${projectInfo.id}`);
             toast.success('Success!');
         }
@@ -129,7 +136,10 @@ const EditNote = () => {
     };
     const selectChangeFunc = (e) => {
         setSelect(parseInt(e.target.value));
-        setNote({ ...note, categoryId: parseInt(e.target.value) });
+        setNote({
+            ...note,
+            categoryId: parseInt(e.target.value),
+        });
     };
 
     const buttonProps = {
@@ -137,7 +147,7 @@ const EditNote = () => {
         elClassName: 'button',
         action: () => uploadImageFunc(),
     };
-    console.log(note);
+
     return (
         <section className="app">
             <article className={`flex ${styles.createNoteArticle}`}>
@@ -155,7 +165,7 @@ const EditNote = () => {
                 setNote={setNote}
                 note={note}
                 select={select}
-                categoriesData={categoriesData}
+                categoriesDataState={categoriesDataState}
                 selectProps={selectProps}
                 setSelectProps={setSelectProps}
                 selectChangeFunc={selectChangeFunc}

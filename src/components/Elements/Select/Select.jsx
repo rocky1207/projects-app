@@ -1,14 +1,12 @@
 import React from 'react';
-import { useState } from 'react';
-
 import './select.css';
+
 const Select = ({ props }) => {
     const elClassName = props.elClassName;
     const optionClassName = props.optionClassName;
     const value = props.value;
     const action = props.action;
     const selectedOption = props.selectedOption;
-    console.log(selectedOption);
 
     return (
         <>

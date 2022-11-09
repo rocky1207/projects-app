@@ -1,15 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Select from '../Elements/Select/Select';
 import { useGetCategoriesQuery } from '../../api/categories/categoriesApiSlice';
 
 import styles from './createNote.module.css';
 
 const CreateNoteForm = ({ note, setNote, select, setSelect }) => {
-    const {
-        data: categoriesData,
-        isSuccess: categoriesSuccess,
-        error: categoriesError,
-    } = useGetCategoriesQuery();
+    const { data: categoriesData } = useGetCategoriesQuery();
 
     const formData = new FormData();
     const selectChangeFunc = (e) => {
@@ -27,7 +23,7 @@ const CreateNoteForm = ({ note, setNote, select, setSelect }) => {
         select: select,
         action: selectChangeFunc,
     };
-    console.log(note);
+
     return (
         <form className={`flex ${styles.createNoteForm}`}>
             <h2>Project Info</h2>

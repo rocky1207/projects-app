@@ -123,15 +123,6 @@ const EditProject = () => {
                                 }
                             />
                         </div>
-                        {/*<div className={styles.projectLogoDiv}>
-                            <label>Choose project logo</label>
-                            <input
-                                type="file"
-                                onChange={(e) =>
-                                    formDataHandler(e.target.files[0])
-                                }
-                            />
-                            </div>*/}
                     </div>
                     <div className={styles.projectDescriptionDiv}>
                         <label>Project description:</label>

@@ -85,10 +85,9 @@ export const editNoteFunc = async (
                 },
             };
         }
-        console.log(data);
+
         const editNoteDatas = { paramsId, data };
         try {
-            console.log(data);
             await editNote(editNoteDatas);
         } catch (error) {
             console.log(error);

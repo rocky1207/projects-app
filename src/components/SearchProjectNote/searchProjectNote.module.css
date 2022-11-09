@@ -133,8 +133,6 @@ Categories
     .editLogoInput {
         left: 1%;
         transform: translate(0, -50%);
-
-        /*  opacity: 0;*/
         cursor: pointer;
         display: block;
     }

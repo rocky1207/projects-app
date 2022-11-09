@@ -20,12 +20,10 @@ const Pagination = () => {
         value: '<<',
         elClassName: 'paginationButton',
         type: 'button',
-        //disabled: pageNumber >= maxPageNumber ? true : false,
         disabled: pageNumber <= 1 ? true : false,
 
         action: () => {
             dispatch(getPageNumber(1));
-
             setPage(1);
         },
     };
@@ -36,10 +34,8 @@ const Pagination = () => {
         additionalElClassName: 'arrowButton',
         type: 'button',
         disabled: pageNumber <= 1 ? true : false,
-        //disabled: pageNumber >= maxPageNumber ? true : false,
         action: () => {
             dispatch(incPageNumber(-1));
-            //dispatch(incPageNumber(1));
             setPage(parseInt(page - 1));
         },
     };
@@ -49,11 +45,9 @@ const Pagination = () => {
         additionalElClassName: 'arrowButton',
         type: 'button',
         disabled: pageNumber >= maxPageNumber ? true : false,
-        //disabled: pageNumber <= 1 ? true : false,
         action: (e) => {
             console.log(e.target.innerText);
             dispatch(incPageNumber(1));
-            //dispatch(incPageNumber(-1));
             setPage(parseInt(page + 1));
         },
     };
@@ -62,7 +56,6 @@ const Pagination = () => {
         elClassName: 'paginationButton',
         type: 'button',
         disabled: pageNumber >= maxPageNumber ? true : false,
-        //disabled: pageNumber <= 1 ? true : false,
         action: () => {
             dispatch(getPageNumber(maxPageNumber));
             setPage(maxPageNumber);
@@ -80,7 +73,7 @@ const Pagination = () => {
     };
 
     let projects = [];
-    if (/*pageNumber <= 3*/ maxPageNumber <= 5) {
+    if (maxPageNumber <= 5) {
         for (let i = 1; i <= maxPageNumber; i++) {
             projects.push(i);
         }

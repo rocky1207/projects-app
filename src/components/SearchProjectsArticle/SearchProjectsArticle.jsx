@@ -8,13 +8,11 @@ import { Link } from 'react-router-dom';
 import doc from '../../assets/icons/document.png';
 import search from '../../assets/icons/search.png';
 import styles from './searchProjectsArticle.module.css';
-import { useUserRoleQuery } from '../../api/userRole/userRoleApiSlice';
 
 const SearchProjectsArticle = ({ role }) => {
     const { members } = useSelector((state) => state.projects);
 
     const dispatch = useDispatch();
-    const { data: roleData, isSuccess: isRoleDataSuccess } = useUserRoleQuery();
 
     const [searchProjectsValue, setSearchProjectsValue] = useState('');
     const buttonProps = {

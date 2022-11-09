@@ -7,7 +7,6 @@ import styles from './modal.module.css';
 const ProjectDescriptionModal = ({
     showProjectDescriptionModal,
     setShowDescriptionModal,
-    projectInfo,
 }) => {
     const propsCloseButton = {
         value: 'Close',
@@ -16,7 +15,6 @@ const ProjectDescriptionModal = ({
         type: 'button',
         action: () => {
             setShowDescriptionModal({
-                // description: projectInfo.description,
                 ...showProjectDescriptionModal,
                 show: false,
             });

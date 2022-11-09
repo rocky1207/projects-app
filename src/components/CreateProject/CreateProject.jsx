@@ -60,8 +60,7 @@ const CreateProject = () => {
         }
     }, [isProjectAdded, isProjectFailed]);
 
-    const { data: filtratedUsersData, error: getFiltratedUsersError } =
-        useGetFiltratedUsersQuery(filter);
+    const { data: filtratedUsersData } = useGetFiltratedUsersQuery(filter);
 
     useEffect(() => {
         setEmployees(filtratedUsersData);

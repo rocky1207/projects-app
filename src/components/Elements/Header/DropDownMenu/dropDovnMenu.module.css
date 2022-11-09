@@ -3,7 +3,6 @@
     top: 58px;
     left: -100px;
     width: 200px;
-    /*transform: translateX(-45%);*/
     background-color: var(--bg);
     border: var(--border);
     border-radius: var(--border-radius);
@@ -49,14 +48,12 @@
     height: 30px;
     fill: var(--white);
     margin: 5px auto;
-    /*vertical-align: bottom;*/
 }
 .settingsSpan svg {
     width: 20px;
     height: 20px;
     fill: var(--white);
     margin: 5px;
-    /*vertical-align: bottom;*/
 }
 
 .myProfileSpan img {

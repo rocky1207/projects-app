@@ -1,27 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import defaultAvatar from '../../assets/icons/defaultAvatad.jpg';
 import Button from '../Elements/Button/Button';
 import { useDispatch } from 'react-redux';
 import { addProjectMembers } from '../../features/projects/projectsSlice';
 import { removeProjectMember } from '../../features/projects/projectsSlice';
-import { editProject } from '../../features/projects/projectsSlice';
 import styles from './filtratedUsers.module.css';
 import '../../App.css';
 
 const FiltratedUsers = ({ employee }) => {
     const dispatch = useDispatch();
-    const ha = [];
-    ha.push(employee.isOn);
-    const [addRemove, setAddRemove] = useState(ha); 
-    //console.log(addRemove);
+    const addRemoveArr = [];
+    addRemoveArr.push(employee.isOn);
+    const [addRemove, setAddRemove] = useState(addRemoveArr);
     const [buttonProps, setButtonProps] = useState({
         value: 'Add',
         elClassName: 'btn',
         type: 'button',
         action: () => {
-            // setAddRemove((prev) => !prev);
-            //dispatch(editProject(employee.id));
             dispatch(addProjectMembers(employee.id));
         },
     });
@@ -30,9 +25,8 @@ const FiltratedUsers = ({ employee }) => {
     const avatar = employee?.logo?.formats.thumbnail.url;
 
     useEffect(() => {
-        // console.log(addRemove);
-        addRemove.map((bla) => {
-            if (bla === false) {
+        addRemove.map((item) => {
+            if (item === false) {
                 setButtonProps({
                     ...buttonProps,
                     value: 'Remove',

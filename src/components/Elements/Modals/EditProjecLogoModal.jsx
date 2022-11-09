@@ -13,7 +13,6 @@ const EditProjectLogoModal = ({
     deleteUploadedImage,
 }) => {
     const projectInfo = showModal.projectInfo;
-    console.log(showModal);
     const dispatch = useDispatch();
 
     const propsCancelButton = {

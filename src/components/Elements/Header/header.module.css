@@ -61,10 +61,6 @@
 
 @media screen and (min-width: 1144px) {
     .header {
-        /*
-        flex-direction: column;
-        justify-content: flex-start !important;
-*/
         align-items: stretch;
         position: absolute;
         left: 0;
@@ -73,8 +69,6 @@
         width: 72px;
     }
     .logoDiv {
-        /* display: block !important;*/
-
         height: 75vh;
         width: 100%;
         padding-right: 0;

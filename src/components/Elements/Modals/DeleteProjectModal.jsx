@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 const DeleteProjectModal = ({ showModal, setShowModal }) => {
     const [
         deleteProject,
-        { data, isSucces: isProjectDeleted, isError: deleteProjecError },
+        { isSucces: isProjectDeleted, isError: deleteProjecError },
     ] = useDeleteProjectMutation();
     const deleteProjectById = async () => {
         try {
@@ -19,8 +19,6 @@ const DeleteProjectModal = ({ showModal, setShowModal }) => {
     };
     useEffect(() => {
         if (isProjectDeleted) {
-            console.log('eto ga');
-
             toast.success('Project successfuly deleted!');
         }
         if (deleteProjecError) {

@@ -27,14 +27,8 @@ const Notes = ({ notes, role }) => {
         description: '',
     });
 
-    const [
-        deleteNote,
-        {
-            data: deleteNoteData,
-            isSuccess: isNoteDeleted,
-            error: deletationError,
-        },
-    ] = useDeleteNoteMutation();
+    const [deleteNote, { isSuccess: isNoteDeleted, error: deletationError }] =
+        useDeleteNoteMutation();
     useEffect(() => {
         if (isNoteDeleted) {
             toast.success('Note deleted!');
@@ -52,7 +46,6 @@ const Notes = ({ notes, role }) => {
         }
     };
 
-    //console.log(notes);
     return (
         <section className={`flex ${styles.notesSection}`}>
             {notes?.data?.map((note) => {
@@ -83,7 +76,7 @@ const Notes = ({ notes, role }) => {
                                         src={remove}
                                         alt="Remove Note"
                                         onClick={() =>
-                                            showDeleteModal({
+                                            setShowDeleteModal({
                                                 noteId: note.id,
                                                 showModal: true,
                                             })

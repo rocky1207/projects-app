@@ -11,7 +11,7 @@ import styles from './showProjects.module.css';
 import '../../App.css';
 import '../../theme.module.css';
 
-const ProjectArticle = ({ project, showModalFunc, role = { role } }) => {
+const ProjectArticle = ({ project, showModalFunc, role }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 

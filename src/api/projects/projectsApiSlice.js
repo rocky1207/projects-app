@@ -10,8 +10,6 @@ export const projectsApiSlice = apiSlice.injectEndpoints({
                     currentUserId +
                     '&filters[$or][1][author][id][$eq]=' +
                     currentUserId,
-
-                //filters[$or][0][employees][id][$eq]=4&filters[$or][1][author][id][$eq]=4
             }),
             providesTags: ['Projects'],
         }),
@@ -28,13 +26,6 @@ export const projectsApiSlice = apiSlice.injectEndpoints({
                     filterDatas.pageNumber +
                     '&pagination[pageSize]=5',
             }),
-            /*
-            transformResponse: (response) => {
-                const bla = response.data.reverse();
-                console.log(bla);
-                return { data: bla };
-            },
-*/
             providesTags: ['Projects'],
         }),
         getProjectById: builder.query({

@@ -1,3 +1,4 @@
+import React from 'react';
 import FiltratedUsers from '../FiltratedUsers/FiltratedUsers';
 
 import styles from './projectInfo.module.css';

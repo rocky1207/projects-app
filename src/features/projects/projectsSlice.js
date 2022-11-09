@@ -64,13 +64,6 @@ const projectsSlice = createSlice({
                 });
         },
         projectLogoState: (state, action) => {
-            /*
-            state.projectInfo.id = action.payload.id;
-            state.projectInfo.name = action.payload.name;
-            state.projectInfo.description = action.payload.description;
-            state.projectInfo.employees = action.payload.employees;
-            state.projectInfo.logo = action.payload.logo;
-            */
             state.projectInfo = {
                 id: action.payload.id,
                 name: action.payload.attributes.name,
@@ -79,8 +72,6 @@ const projectsSlice = createSlice({
                 logo: action.payload.attributes.logo.data.attributes.formats
                     .thumbnail.url,
             };
-
-            //state.projectLogo = action.payload;
         },
     },
 });

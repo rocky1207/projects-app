@@ -5,16 +5,12 @@ import logo from '../../../assets/icons/logo-services.png';
 import SvgRotate from '../../iconComponents/SvgRotate';
 import SvgSun from '../../iconComponents/SvgSun';
 import defaultAvatar from '../../../assets/icons/defaultAvatad.jpg';
-import { logOut } from '../../../features/auth/authSlice';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import styles from './header.module.css';
 
 const Header = () => {
     const author = useSelector((state) => state.projects.avatar);
-
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [showDropMenu, setShowDropMenu] = useState(false);
 

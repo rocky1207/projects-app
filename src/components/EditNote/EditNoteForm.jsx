@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Select from '../Elements/Select/Select';
-
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { noteEdit } from '../../features/notes/notesSlice';
 import styles from '../CreateNote/createNote.module.css';
 
 const EditNoteForm = ({
@@ -9,20 +11,30 @@ const EditNoteForm = ({
     select,
     setSelectProps,
     selectProps,
-    categoriesData,
     selectChangeFunc,
+    categoriesDataState,
 }) => {
+    const editNoteData = useSelector((state) => state.notes);
+
+    const dispatch = useDispatch();
+
     useEffect(() => {
         if (select) {
+            setNote({
+                noteTitle: editNoteData.noteTitle,
+                noteDescription: editNoteData.noteDescription,
+                imageState: editNoteData.imageState,
+                categoryId: select,
+            });
             setSelectProps({
                 elClassName: 'categorySelect',
                 optionClassName: 'categoryOption',
-                value: categoriesData?.data,
+                value: categoriesDataState,
                 selectedOption: select,
                 action: selectChangeFunc,
             });
         }
-    }, [select]);
+    }, [select, categoriesDataState]);
 
     const formData = new FormData();
     return (
@@ -36,12 +48,21 @@ const EditNoteForm = ({
                         </label>
                         <input
                             className={styles.noteTitleInput}
-                            value={note.noteTitle}
+                            value={note?.noteTitle}
                             type="text"
                             placeholder="Enter Note title"
-                            onChange={(e) =>
-                                setNote({ ...note, noteTitle: e.target.value })
-                            }
+                            onChange={(e) => {
+                                setNote({
+                                    ...note,
+                                    noteTitle: e.target.value,
+                                });
+                                dispatch(
+                                    noteEdit({
+                                        ...editNoteData,
+                                        noteTitle: e.target.value,
+                                    })
+                                );
+                            }}
                         />
                     </div>
 
@@ -65,13 +86,19 @@ const EditNoteForm = ({
                         Note Description:
                     </label>
                     <textarea
-                        value={note.noteDescription}
-                        onChange={(e) =>
+                        value={note?.noteDescription}
+                        onChange={(e) => {
                             setNote({
                                 ...note,
                                 noteDescription: e.target.value,
-                            })
-                        }
+                            });
+                            dispatch(
+                                noteEdit({
+                                    ...editNoteData,
+                                    noteDescription: e.target.value,
+                                })
+                            );
+                        }}
                     ></textarea>
                 </div>
                 <div className={styles.chooseCategoryDiv}>

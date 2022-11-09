@@ -1,21 +1,20 @@
 import { createPortal } from 'react-dom';
-import { useDispatch } from 'react-redux';
 import Button from '../Button/Button';
 
 import styles from './modal.module.css';
 
-const DeletetNoteModal = ({ showModal, setShowModal, deleteNoteFunc }) => {
-    const projectInfo = showModal.projectInfo;
-    console.log(showModal);
-    const dispatch = useDispatch();
-
+const DeletetNoteModal = ({
+    showDeleteModal,
+    setShowDeleteModal,
+    deleteNoteFunc,
+}) => {
     const propsCancelButton = {
         value: 'Cancel',
         elClassName: 'cancelButton',
         additionalElClassName: 'confirmButtons',
         type: 'button',
         action: () => {
-            setShowModal({ noteId: null, showModal: false });
+            setShowDeleteModal({ noteId: null, showModal: false });
         },
     };
     const propsDeleteButton = {
@@ -24,8 +23,8 @@ const DeletetNoteModal = ({ showModal, setShowModal, deleteNoteFunc }) => {
         additionalElClassName: 'confirmButtons',
         type: 'button',
         action: () => {
-            setShowModal({ noteId: null, showModal: false });
-            deleteNoteFunc(showModal.noteId);
+            setShowDeleteModal({ noteId: null, showModal: false });
+            deleteNoteFunc(showDeleteModal.noteId);
         },
     };
     return createPortal(
@@ -33,8 +32,10 @@ const DeletetNoteModal = ({ showModal, setShowModal, deleteNoteFunc }) => {
             <article className={styles.modalArticle}>
                 <h3>Confirm Deletion</h3>
                 <p>
-                    Are You sure you want to delete note #{showModal.noteId}
-                    <span>{showModal.id}</span>? This action can not be undone!
+                    Are You sure you want to delete note #
+                    {showDeleteModal.noteId}
+                    <span>{showDeleteModal.id}</span>? This action can not be
+                    undone!
                 </p>
                 <div className={`flex ${styles.confirmButtonsDiv}`}>
                     <Button props={propsCancelButton}></Button>

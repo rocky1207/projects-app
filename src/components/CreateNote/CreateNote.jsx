@@ -27,10 +27,8 @@ const CreateNote = () => {
     });
     const [select, setSelect] = useState(1);
 
-    const [
-        postNote,
-        { data: noteData, isSuccess: isNoteSuccess, error: noteError },
-    ] = usePostNoteMutation();
+    const [postNote, { isSuccess: isNoteSuccess, error: noteError }] =
+        usePostNoteMutation();
 
     const [
         uploadImage,

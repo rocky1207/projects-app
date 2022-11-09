@@ -60,11 +60,7 @@ const SearchProjectNote = () => {
 
     const [
         editProject,
-        {
-            data: projectData,
-            isSuccess: projectDataSuccess,
-            error: projectDataError,
-        },
+        { isSuccess: projectDataSuccess, error: projectDataError },
     ] = useEditProjectMutation();
     const editLogoId = async () => {
         const editLogoObj = {
@@ -83,7 +79,6 @@ const SearchProjectNote = () => {
             toast.success('Successfuly added');
         }
         if (projectDataError) {
-            console.log(projectDataError);
             toast.error(projectDataError.data.error.message);
         }
     }, [projectDataSuccess, projectDataError]);
