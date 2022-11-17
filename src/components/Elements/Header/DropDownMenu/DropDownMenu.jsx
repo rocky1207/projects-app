@@ -43,12 +43,12 @@ const DropDownMenu = () => {
                         <SvgLogout
                             background={'#fff'}
                             onClick={() => {
+                                navigate('/');
                                 dispatch(logOut());
 
                                 window.location.reload(true);
 
                                 roleOn('');
-                                navigate('/');
                             }}
                         />
                     </span>

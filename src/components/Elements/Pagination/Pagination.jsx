@@ -46,7 +46,6 @@ const Pagination = () => {
         type: 'button',
         disabled: pageNumber >= maxPageNumber ? true : false,
         action: (e) => {
-            console.log(e.target.innerText);
             dispatch(incPageNumber(1));
             setPage(parseInt(page + 1));
         },

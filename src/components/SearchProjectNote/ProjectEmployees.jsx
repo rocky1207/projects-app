@@ -5,7 +5,7 @@ const ProjectEmployees = ({ api_url, avatar, defaultAvatar, projectInfo }) => {
     const employeeImgs = projectInfo.employees.data.map(
         (img) => img.attributes.logo?.data?.attributes.formats.thumbnail.url
     );
-
+    console.log(employeeImgs);
     let smallEmployeesArray = employeeImgs.length - 5;
 
     const ids = projectInfo.employees.data.map((id) => id.id);
@@ -26,13 +26,19 @@ const ProjectEmployees = ({ api_url, avatar, defaultAvatar, projectInfo }) => {
                 <figure
                     className={`${styles.figure} ${styles.employeeImgFigure}`}
                 >
+                    {employeeImgs.length < 1 ? (
+                        <>
+                            <img key={1} src={defaultAvatar} alt="Employee" />
+                            <span className={styles.employeesSpan}> 0</span>
+                        </>
+                    ) : null}
                     {employeeImgs.length < 6
                         ? employeeImgs.map((img, index) => (
                               <img
                                   key={ids[index]}
                                   src={
                                       img
-                                          ? `${api_url}${avatar}`
+                                          ? `${api_url}${employeeImgs[index]}`
                                           : defaultAvatar
                                   }
                                   alt="Employee"
@@ -45,7 +51,7 @@ const ProjectEmployees = ({ api_url, avatar, defaultAvatar, projectInfo }) => {
                                       key={ids[index]}
                                       src={
                                           img
-                                              ? `${api_url}${avatar}`
+                                              ? `${api_url}${employeeImgs[index]}`
                                               : defaultAvatar
                                       }
                                       alt="Employee"

@@ -11,6 +11,7 @@ import styles from './header.module.css';
 
 const Header = () => {
     const author = useSelector((state) => state.projects.avatar);
+    console.log(author);
     const navigate = useNavigate();
     const [showDropMenu, setShowDropMenu] = useState(false);
 

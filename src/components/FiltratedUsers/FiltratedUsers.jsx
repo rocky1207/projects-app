@@ -22,7 +22,8 @@ const FiltratedUsers = ({ employee }) => {
     });
 
     const api_url = 'http://localhost:1337';
-    const avatar = employee?.logo?.formats.thumbnail.url;
+    console.log(employee);
+    const avatar = employee?.logo?.formats?.thumbnail?.url;
 
     useEffect(() => {
         addRemove.map((item) => {

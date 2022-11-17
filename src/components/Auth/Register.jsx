@@ -33,24 +33,19 @@ const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
-    const [image, setImage] = useState();
+    const [finallPass, setFinallPass] = useState('');
+    const [image, setImage] = useState(null);
 
     const [disabled, setDisabled] = useState(true);
     const [registerDatas, setRegisterDatas] = useState({});
     const [datas, setDatas] = useState(null);
 
-    const formData = new FormData();
+    let formData = new FormData();
 
     useEffect(() => {
         if (datas) {
             registerApiTrigger();
         }
-
-        setUsername('');
-        setEmail('');
-        setPassword('');
-        setPasswordConfirm('');
-        setImage();
     }, [datas]);
 
     const registerApiTrigger = async () => {
@@ -72,16 +67,18 @@ const Register = () => {
             });
         }
     }, [username, email, image, password, passwordConfirm]);
+
     useEffect(() => {
         const { checkedUsername, checkedEmail, checkedPassword } =
             validateDatas(registerDatas, 'register');
-
+        console.log(checkedPassword);
         if (!checkedUsername || !checkedEmail || !checkedPassword) {
+            console.log(checkedPassword);
             return;
         } else {
             setUsername(checkedUsername);
             setEmail(checkedEmail);
-            setPassword(checkedPassword);
+            setFinallPass(checkedPassword);
         }
     }, [registerDatas]);
 
@@ -97,11 +94,17 @@ const Register = () => {
         if (registerSuccess) {
             navigate('/');
             toast.success('Register Success');
+            setUsername('');
+            setEmail('');
+            setPassword('');
+            setPasswordConfirm('');
+            setFinallPass('');
+            setImage(null);
         }
-        if (uploadError) {
-            toast.error(uploadError.message);
+        if (registerError) {
+            toast.error(errorMsg.data.error.message);
         }
-    }, [uploadError, registerSuccess]);
+    }, [registerError, registerSuccess]);
 
     useEffect(() => {
         if (data && uploadSuccess) {
@@ -109,19 +112,17 @@ const Register = () => {
             const changedDatas = {
                 username: username,
                 email: email,
-                password: password,
+                password: finallPass,
                 logo: id,
             };
 
             setDatas(changedDatas);
         }
-    }, [uploadSuccess, data]);
 
-    useEffect(() => {
-        if (registerError) {
-            toast(errorMsg);
+        if (uploadError) {
+            toast.error(uploadError.message);
         }
-    }, [registerError]);
+    }, [uploadSuccess, data, uploadError]);
 
     const loadRegisterFunc = () => {
         return <h2>Loading...</h2>;

@@ -19,6 +19,7 @@ const DeleteProjectModal = ({ showModal, setShowModal }) => {
     };
     useEffect(() => {
         if (isProjectDeleted) {
+            console.log('deleted');
             toast.success('Project successfuly deleted!');
         }
         if (deleteProjecError) {

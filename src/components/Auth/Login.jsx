@@ -50,7 +50,7 @@ const Login = () => {
         if (isLoginSuccess) {
             localStorage.setItem('token', data.jwt);
             dispatch(loginCredentials(data));
-            toast('Login Success');
+            toast.success('Login Success');
         }
         if (isLoginError) {
             if (loginError.data.error.details.errors) {
@@ -64,7 +64,7 @@ const Login = () => {
     }, [isLoginSuccess, isLoginError]);
 
     const loading = () => {
-        return <h2>Loading...</h2>;
+        return <h2>aLoading...</h2>;
     };
     useEffect(() => {
         if (isLoading) {

@@ -21,10 +21,10 @@ const ProjectArticle = ({ project, showModalFunc, role }) => {
     const projectName = project.attributes.name;
     const api_url = 'http://localhost:1337';
     const projectLogo =
-        project?.attributes?.logo?.data?.attributes.formats.thumbnail.url;
+        project?.attributes?.logo?.data?.attributes?.formats?.thumbnail?.url;
     const authorAvatar =
         project?.attributes?.author?.data?.attributes?.logo?.data?.attributes
-            ?.formats.thumbnail.url;
+            ?.formats?.thumbnail?.url;
     const numOfEmployees = project.attributes.employees.data.length;
     useEffect(() => {
         dispatch(projectsAuthor(authorAvatar));

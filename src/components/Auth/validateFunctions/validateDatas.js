@@ -25,9 +25,12 @@ export const validateDatas = (datas, actionType) => {
                 } else {
                     checkedPassword = '';
                 }
+            } else if (datas.password !== datas.passwordConfirm) {
+                checkedPassword = '';
             } else {
                 checkedPassword = '';
             }
+
             return { checkedUsername, checkedEmail, checkedPassword };
         case 'login':
             if (datas.email) {
