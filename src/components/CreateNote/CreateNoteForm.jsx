@@ -4,7 +4,7 @@ import { useGetCategoriesQuery } from '../../api/categories/categoriesApiSlice';
 
 import styles from './createNote.module.css';
 
-const CreateNoteForm = ({ note, setNote, select, setSelect }) => {
+const CreateNoteForm = ({ note, setNote, select, setSelect, isDark }) => {
     const { data: categoriesData } = useGetCategoriesQuery();
 
     const formData = new FormData();
@@ -18,7 +18,7 @@ const CreateNoteForm = ({ note, setNote, select, setSelect }) => {
     }, [select]);
     const selectProps = {
         elClassName: 'categorySelect',
-        optionClassName: 'categoryOption',
+        optionClassName: isDark ? 'categoryOptionDark' : 'categoryOptionLight',
         value: categoriesData?.data,
         select: select,
         action: selectChangeFunc,

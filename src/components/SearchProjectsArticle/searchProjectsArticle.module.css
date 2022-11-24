@@ -1,7 +1,7 @@
 .searchProjectsArticle {
     max-width: 90%;
     margin: 0 auto;
-    padding: 40px 0;
+    padding: 100px 0 40px 0;
 }
 .searchProjectsArticle img {
     height: 70px;
@@ -42,7 +42,9 @@
 @media only screen and (min-width: 768px) {
     .searchProjectsArticle {
         align-items: flex-start !important;
+        padding: 50px 0 40px 0;
     }
+
     .searchProjectsHeadDiv {
         max-width: 390px;
         justify-content: flex-start !important;

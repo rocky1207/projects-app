@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import defaultAvatar from '../../assets/icons/defaultAvatad.jpg';
 import edit from '../../assets/icons/edit-button.png';
 import remove from '../../assets/icons/close-button.png';
@@ -7,13 +7,24 @@ import { projectsAuthor } from '../../features/projects/projectsSlice';
 import { projectLogoState } from '../../features/projects/projectsSlice';
 import { useNavigate } from 'react-router-dom';
 import { editProject } from '../../features/projects/projectsSlice';
+import { employeeAvatar } from '../../features/employeeAvatar/employeeAvatarSlice';
 import styles from './showProjects.module.css';
 import '../../App.css';
-import '../../theme.module.css';
 
 const ProjectArticle = ({ project, showModalFunc, role }) => {
+    const { currentUserId } = useSelector((state) => state.auth);
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const user = project?.attributes?.employees?.data?.find(
+        (user) => user.id === currentUserId
+    );
+    const usersAvatar =
+        user?.attributes?.logo?.data?.attributes?.formats?.thumbnail?.url;
+
+    useEffect(() => {
+        dispatch(employeeAvatar(usersAvatar));
+    }, [user]);
 
     let projects = [];
     projects.push(project);

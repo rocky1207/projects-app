@@ -14,10 +14,12 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import styles from './createProject.module.css';
+import themeStyles from '../../theme.module.css';
 
 const CreateProject = () => {
     const { currentUserId } = useSelector((state) => state.auth);
     const { members } = useSelector((state) => state.projects);
+    const { isDark } = useSelector((state) => state.theme);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -61,6 +63,7 @@ const CreateProject = () => {
     }, [isProjectAdded, isProjectFailed]);
 
     const { data: filtratedUsersData } = useGetFiltratedUsersQuery(filter);
+    console.log(filtratedUsersData);
 
     useEffect(() => {
         setEmployees(filtratedUsersData);
@@ -155,23 +158,27 @@ const CreateProject = () => {
     }, [isProjectAdded]);
 
     return (
-        <section className="app">
-            <article className={`flex ${styles.createProjectArticle}`}>
-                <div className={`flex ${styles.createProjectHeadDiv}`}>
-                    <img src={doc} alt="document" />
-                    <div className={styles.createProjectArticleHead}>
-                        <h2>Create a Project</h2>
-                        <p>Here you can create a new project</p>
+        <div
+            className={isDark ? `${themeStyles.dark}` : `${themeStyles.light}`}
+        >
+            <section className="app">
+                <article className={`flex ${styles.createProjectArticle}`}>
+                    <div className={`flex ${styles.createProjectHeadDiv}`}>
+                        <img src={doc} alt="document" />
+                        <div className={styles.createProjectArticleHead}>
+                            <h2>Create a Project</h2>
+                            <p>Here you can create a new project</p>
+                        </div>
                     </div>
-                </div>
 
-                <Button
-                    props={buttonProps}
-                    action={() => newProjectSubmit()}
-                ></Button>
-            </article>
-            <ProjectInfo props={projectInfoProps} />
-        </section>
+                    <Button
+                        props={buttonProps}
+                        action={() => newProjectSubmit()}
+                    ></Button>
+                </article>
+                <ProjectInfo props={projectInfoProps} />
+            </section>
+        </div>
     );
 };
 

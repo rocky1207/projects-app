@@ -1,7 +1,7 @@
 import SvgLogout from '../../../iconComponents/SvgLogout';
 import SvgSettings from '../../../iconComponents/SvgSettings';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { themeMode } from '../../../../features/theme/themeSlice';
 import { logOut } from '../../../../features/auth/authSlice';
 
 import defalutAvatar from '../../../../assets/icons/defaultAvatad.jpg';
@@ -9,22 +9,26 @@ import styles from './dropDovnMenu.module.css';
 import { roleOn } from '../../../../features/role/roleSlice';
 import { useNavigate } from 'react-router-dom';
 
-const DropDownMenu = () => {
-    const author = useSelector((state) => state.projects.avatar);
-
+const DropDownMenu = ({ avatar, isDark }) => {
     const api_url = 'http://localhost:1337';
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     return (
-        <nav className={styles.dropDownMenu}>
+        <nav
+            className={
+                isDark
+                    ? `${styles.dropDownMenu} ${styles.dropDownMenuBgDark}`
+                    : `${styles.dropDownMenu} ${styles.dropDownMenuBgLight}`
+            }
+        >
             <ul>
                 <li>
                     <span
                         className={`${styles.dropDownSpan} ${styles.myProfileSpan}`}
                     >
                         <img
-                            src={author ? `${api_url}${author}` : defalutAvatar}
+                            src={avatar ? `${api_url}${avatar}` : defalutAvatar}
                             alt="Avatar"
                         />
                     </span>
@@ -44,6 +48,7 @@ const DropDownMenu = () => {
                             background={'#fff'}
                             onClick={() => {
                                 navigate('/');
+                                dispatch(themeMode(false));
                                 dispatch(logOut());
 
                                 window.location.reload(true);

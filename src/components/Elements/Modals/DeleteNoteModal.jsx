@@ -31,7 +31,13 @@ const DeletetNoteModal = ({
         <section className={styles.modalBackground}>
             <article className={styles.modalArticle}>
                 <h3>Confirm Deletion</h3>
-                <p>
+                <p
+                    className={
+                        showDeleteModal.isDark
+                            ? `${styles.modalDark}`
+                            : `${styles.modalLight}`
+                    }
+                >
                     Are You sure you want to delete note #
                     {showDeleteModal.noteId}
                     <span>{showDeleteModal.id}</span>? This action can not be

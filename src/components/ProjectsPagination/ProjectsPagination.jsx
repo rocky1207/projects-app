@@ -9,10 +9,17 @@ const ProjectsPagination = () => {
     const dispatch = useDispatch();
 
     const { maxPageNumber } = useSelector((state) => state.search);
+    const { isDark } = useSelector((state) => state.theme);
 
     return (
         <div className={styles.paginationRootDiv}>
-            <div className={styles.paginationContainerDiv}>
+            <div
+                className={
+                    isDark
+                        ? `${styles.paginationContainerDiv} ${styles.paginationContainerDivDark}`
+                        : `${styles.paginationContainerDiv} ${styles.paginationContainerDivLight}`
+                }
+            >
                 <Pagination
                     count={maxPageNumber}
                     className={styles.pagination}

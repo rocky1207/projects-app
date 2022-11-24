@@ -33,11 +33,17 @@
 }
 
 .paginationButton {
-    color: var(--white);
+    /* color: var(--white);*/
     background: none;
     margin: 0 2px;
     padding: 5px;
     font-size: 16px;
+}
+.paginationButtonColorDark {
+    color: var(--white);
+}
+.paginationButtonColorLight {
+    color: var(--black);
 }
 .paginationButton:hover {
     cursor: pointer;

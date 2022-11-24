@@ -4,25 +4,33 @@
 }
 .paginationContainerDiv {
     position: fixed;
-    bottom: 20px;
+    bottom: 0;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(30, 30, 30, 0.9);
+
     padding: 10px 0;
 }
-.pagination button {
+.paginationContainerDivDark {
+    background: rgba(30, 30, 30, 0.9);
     color: rgba(255, 255, 255, 0.87);
+}
+.paginationContainerDivLight {
+    background: #909296;
+    color: #000;
+}
+.pagination button {
+    /*  color: rgba(255, 255, 255, 0.87);*/
     padding: 0;
     margin: 0;
     font-size: 14px;
 }
-
+/*
 .pagination div {
     color: rgba(255, 255, 255, 0.87);
 }
-
+*/
 @media screen and (min-width: 767px) {
     .paginationContainerDiv {
         width: 800px;

@@ -1,9 +1,12 @@
+/*
 .searchNotesSection {
     padding: 24px 20px;
 }
+*/
 .searchNotesFlexDiv {
     flex-direction: column;
     align-items: flex-start;
+    padding: 100px 20px 24px;
 }
 .projectLogoForm {
     margin: 0 0 20px 0;
@@ -81,6 +84,7 @@ Categories
 ***********/
 .addNoteDiv {
     margin: 0 0 50px 0;
+    padding: 0 20px;
 }
 .categories {
     border: 1px solid var(--white);
@@ -93,12 +97,22 @@ Categories
     flex-direction: column;
     align-items: flex-start;
 }
-.liMarked {
+.liMarkedDark {
     color: var(--white);
 }
-.categories li:hover {
+.liMarkedLight {
+    color: var(--black);
+}
+.liDark:hover {
     cursor: pointer;
     color: var(--white);
+}
+.liLight:hover {
+    cursor: pointer;
+    color: var(--black);
+}
+.searchInputDiv {
+    padding: 0 20px;
 }
 .searchInputDiv img {
     width: 30px;
@@ -119,8 +133,6 @@ Categories
     font-size: 16px;
 }
 
-@media screen and (min-width: 500px) and (max-width: 767px) {
-}
 @media screen and (min-width: 768px) {
     .searchNotesFlexDiv {
         flex-direction: row;
@@ -178,5 +190,10 @@ Categories
     }
     .searchInputDiv input::placeholder {
         font-size: 18px;
+    }
+}
+@media screen and (min-width: 1144px) {
+    .searchNotesFlexDiv {
+        padding: 50px 20px;
     }
 }

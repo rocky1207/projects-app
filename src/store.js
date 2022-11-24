@@ -5,6 +5,9 @@ import projectsReducer from './features/projects/projectsSlice';
 import categoryReducer from './features/categories/categoriesSlice';
 import notesReducer from './features/notes/notesSlice';
 import roleReducer from './features/role/roleSlice';
+import employeeAvatarReducer from './features/employeeAvatar/employeeAvatarSlice';
+import themeReducer from './features/theme/themeSlice';
+
 import { combineReducers } from '@reduxjs/toolkit';
 import { apiSlice } from './api/apiSlice';
 
@@ -34,6 +37,8 @@ const reducer = combineReducers({
     categories: categoryReducer,
     notes: notesReducer,
     role: roleReducer,
+    employeeAvatar: employeeAvatarReducer,
+    theme: themeReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
 });
 

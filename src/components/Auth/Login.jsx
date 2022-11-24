@@ -21,7 +21,7 @@ const Login = () => {
             error: loginError,
         },
     ] = useLoginMutation();
-
+    console.log(data);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 

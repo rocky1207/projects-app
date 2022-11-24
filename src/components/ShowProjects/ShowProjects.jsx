@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
     useProjectsLengthQuery,
     useProjectsQuery,
@@ -14,22 +14,26 @@ import { useDispatch, useSelector } from 'react-redux';
 import ProjectArticle from './ProjectArticle';
 import DeleteProjectModal from '../Elements/Modals/DeleteProjectModal';
 import { toast } from 'react-toastify';
-
 import { roleOn } from '../../features/role/roleSlice';
 
 import styles from './showProjects.module.css';
 import '../../App.css';
-import { useState } from 'react';
+import themeStyles from '../../theme.module.css';
 
 const ShowProjects = () => {
     const { currentUserId } = useSelector((state) => state.auth);
+    const { isDark } = useSelector((state) => state.theme);
 
     const { data: roleData, isSuccess: isRoleDataSuccess } = useUserRoleQuery();
     const dispatch = useDispatch();
 
     const { data: projectsLength } = useProjectsLengthQuery(currentUserId);
     const [role, setRole] = useState('');
-    const [showModal, setShowModal] = useState({ showModal: false, id: null });
+    const [showModal, setShowModal] = useState({
+        showModal: false,
+        id: null,
+        isDark: isDark,
+    });
 
     useEffect(() => {
         setRole(roleData?.role?.name);
@@ -73,29 +77,33 @@ const ShowProjects = () => {
     }, [isProjectsError, projectsLoading]);
 
     return (
-        <section className="app">
-            {showModal.showModal ? (
-                <DeleteProjectModal
-                    showModal={showModal}
-                    setShowModal={setShowModal}
-                ></DeleteProjectModal>
-            ) : null}
-            <SearchProjectsArticle role={role} />
-            <div className={styles.projectsDiv}>
-                {projects?.data.map((project) => {
-                    return (
-                        <ProjectArticle
-                            key={project.id}
-                            project={project}
-                            showModalFunc={setShowModal}
-                            role={role}
-                        />
-                    );
-                })}
-            </div>
+        <div
+            className={isDark ? `${themeStyles.dark}` : `${themeStyles.light}`}
+        >
+            <section className="app">
+                {showModal.showModal ? (
+                    <DeleteProjectModal
+                        showModal={showModal}
+                        setShowModal={setShowModal}
+                    ></DeleteProjectModal>
+                ) : null}
+                <SearchProjectsArticle role={role} />
+                <div className={styles.projectsDiv}>
+                    {projects?.data.map((project) => {
+                        return (
+                            <ProjectArticle
+                                key={project.id}
+                                project={project}
+                                showModalFunc={setShowModal}
+                                role={role}
+                            />
+                        );
+                    })}
+                </div>
 
-            <ProjectsPagination />
-        </section>
+                <ProjectsPagination />
+            </section>
+        </div>
     );
 };
 

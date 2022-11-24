@@ -13,8 +13,10 @@ const EditNoteForm = ({
     selectProps,
     selectChangeFunc,
     categoriesDataState,
+    isDark,
 }) => {
     const editNoteData = useSelector((state) => state.notes);
+    console.log(isDark);
 
     const dispatch = useDispatch();
 
@@ -28,13 +30,16 @@ const EditNoteForm = ({
             });
             setSelectProps({
                 elClassName: 'categorySelect',
-                optionClassName: 'categoryOption',
+                optionClassName: isDark
+                    ? 'categoryOptionDark'
+                    : 'categoryOptionLight',
                 value: categoriesDataState,
                 selectedOption: select,
                 action: selectChangeFunc,
             });
         }
-    }, [select, categoriesDataState]);
+    }, [select, categoriesDataState, isDark]);
+    console.log(selectProps);
 
     const formData = new FormData();
     return (

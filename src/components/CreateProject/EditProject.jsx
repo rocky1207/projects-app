@@ -9,10 +9,11 @@ import Button from '../Elements/Button/Button';
 
 import { toast } from 'react-toastify';
 import styles from './projectInfo.module.css';
+import themeStyles from '../../theme.module.css';
 
 const EditProject = () => {
     const { editProjectInfo, members } = useSelector((state) => state.projects);
-
+    const { isDark } = useSelector((state) => state.theme);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -25,9 +26,9 @@ const EditProject = () => {
         description: editProjectInfo?.projectDescription,
         employees: editProjectInfo?.employees,
     });
-
+    console.log(filter);
     const { data } = useGetFiltratedUsersQuery(filter);
-
+    console.log(data);
     useEffect(() => {
         dispatch(addProjectMembers(null));
     }, []);
@@ -53,7 +54,7 @@ const EditProject = () => {
             const filtratedEmployees = addedEmployees.filter(
                 (item, index) => item.id === uniqueIds[index]
             );
-
+            console.log(filtratedEmployees);
             setEmployees(filtratedEmployees);
         }
     }, [editProjectInfo, data]);
@@ -65,7 +66,7 @@ const EditProject = () => {
             employees: members,
         });
     }, [members]);
-
+    console.log(editProjectInfo);
     const [editProject, { isSuccess: isEditSuccess, error: editError }] =
         useEditProjectMutation();
     const sendUpdatedDatas = async () => {
@@ -100,61 +101,67 @@ const EditProject = () => {
     };
 
     return (
-        <section className="app">
-            <div className={styles.projectInfo}>
-                <Button props={buttonProps}></Button>
-                <form className={styles.projectInfoForm}>
-                    <div className={styles.projectInfoDiv}>
-                        <h3>Project Info</h3>
-                        <div className={styles.projectNameDiv}>
-                            <label className={styles.projectNameLabel}>
-                                Project Name:
-                            </label>
-                            <input
-                                type="text"
-                                placeholder="Edit project name"
-                                value={editProjectState.name}
+        <div
+            className={isDark ? `${themeStyles.dark}` : `${themeStyles.light}`}
+        >
+            <section className="app">
+                <div className={styles.projectInfo}>
+                    <Button props={buttonProps}></Button>
+                    <form className={styles.projectInfoForm}>
+                        <div className={styles.projectInfoDiv}>
+                            <h3>Project Info</h3>
+                            <div className={styles.projectNameDiv}>
+                                <label className={styles.projectNameLabel}>
+                                    Project Name:
+                                </label>
+                                <input
+                                    type="text"
+                                    placeholder="Edit project name"
+                                    value={editProjectState.name}
+                                    onChange={(e) =>
+                                        setEditProjectState({
+                                            ...editProjectState,
+
+                                            name: e.target.value,
+                                        })
+                                    }
+                                />
+                            </div>
+                        </div>
+                        <div className={styles.projectDescriptionDiv}>
+                            <label>Project description:</label>
+                            <textarea
+                                placeholder="Edit Project Description"
+                                value={editProjectState.description}
                                 onChange={(e) =>
                                     setEditProjectState({
                                         ...editProjectState,
 
-                                        name: e.target.value,
+                                        description: e.target.value,
                                     })
                                 }
-                            />
+                            ></textarea>
                         </div>
+                    </form>
+                    <div className={styles.projectMembersDiv}>
+                        <h3>Members</h3>
+                        <input
+                            placeholder="Edit team members"
+                            onChange={(e) => {
+                                if (e.target.value.length > 2) {
+                                    setFilter(e.target.value);
+                                }
+                            }}
+                        />
                     </div>
-                    <div className={styles.projectDescriptionDiv}>
-                        <label>Project description:</label>
-                        <textarea
-                            placeholder="Edit Project Description"
-                            value={editProjectState.description}
-                            onChange={(e) =>
-                                setEditProjectState({
-                                    ...editProjectState,
-
-                                    description: e.target.value,
-                                })
-                            }
-                        ></textarea>
-                    </div>
-                </form>
-                <div className={styles.projectMembersDiv}>
-                    <h3>Members</h3>
-                    <input
-                        placeholder="Edit team members"
-                        onChange={(e) => {
-                            if (e.target.value.length > 2) {
-                                setFilter(e.target.value);
-                            }
-                        }}
-                    />
                 </div>
-            </div>
-            {employees?.map((employee) => {
-                return <FiltratedUsers key={employee.id} employee={employee} />;
-            })}
-        </section>
+                {employees?.map((employee) => {
+                    return (
+                        <FiltratedUsers key={employee.id} employee={employee} />
+                    );
+                })}
+            </section>
+        </div>
     );
 };
 export default EditProject;

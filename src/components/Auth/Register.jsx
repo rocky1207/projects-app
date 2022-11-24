@@ -71,9 +71,8 @@ const Register = () => {
     useEffect(() => {
         const { checkedUsername, checkedEmail, checkedPassword } =
             validateDatas(registerDatas, 'register');
-        console.log(checkedPassword);
+
         if (!checkedUsername || !checkedEmail || !checkedPassword) {
-            console.log(checkedPassword);
             return;
         } else {
             setUsername(checkedUsername);

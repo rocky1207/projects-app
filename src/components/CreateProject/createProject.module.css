@@ -1,7 +1,7 @@
 .createProjectArticle {
     max-width: 90%;
     margin: 0 auto;
-    padding-top: 40px;
+    padding-top: 100px;
 }
 .createProjectArticle img {
     height: 70px;
@@ -30,5 +30,10 @@
     }
     .createProjectArticleHead p {
         font-size: 20px;
+    }
+}
+@media only screen and (min-width: 1144px) {
+    .createProjectArticle {
+        padding-top: 40px;
     }
 }

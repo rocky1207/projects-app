@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 import '../../App.css';
 import styles from './createNote.module.css';
+import themeStyles from '../../theme.module.css';
 
 import { toast } from 'react-toastify';
 
@@ -18,6 +19,7 @@ const CreateNote = () => {
     const navigate = useNavigate();
     const { currentUserId } = useSelector((state) => state.auth);
     const { projectInfo } = useSelector((state) => state.projects);
+    const { isDark } = useSelector((state) => state.theme);
 
     const [note, setNote] = useState({
         noteTitle: '',
@@ -50,7 +52,6 @@ const CreateNote = () => {
             );
         }
         if (uploadImageError) {
-            console.log(uploadImageError);
             toast.error('upload image error: ' + uploadImageError.message);
         }
     }, [uploadImageDataSuccess, uploadImageError]);
@@ -94,25 +95,30 @@ const CreateNote = () => {
         action: () => uploadImageFunc(),
     };
     return (
-        <section className="app">
-            <article className={`flex ${styles.createNoteArticle}`}>
-                <div className={`flex ${styles.searchProjectsHeadDiv}`}>
-                    <img src={doc} alt="document" />
-                    <div className={styles.searchProjectsArticleHead}>
-                        <h2>Create a Note</h2>
-                        <p>Here you can create a new note</p>
+        <div
+            className={isDark ? `${themeStyles.dark}` : `${themeStyles.light}`}
+        >
+            <section className="app">
+                <article className={`flex ${styles.createNoteArticle}`}>
+                    <div className={`flex ${styles.searchProjectsHeadDiv}`}>
+                        <img src={doc} alt="document" />
+                        <div className={styles.searchProjectsArticleHead}>
+                            <h2>Create a Note</h2>
+                            <p>Here you can create a new note</p>
+                        </div>
                     </div>
-                </div>
 
-                <Button props={buttonProps}></Button>
-            </article>
-            <CreateNoteForm
-                setNote={setNote}
-                note={note}
-                select={select}
-                setSelect={setSelect}
-            ></CreateNoteForm>
-        </section>
+                    <Button props={buttonProps}></Button>
+                </article>
+                <CreateNoteForm
+                    setNote={setNote}
+                    note={note}
+                    select={select}
+                    setSelect={setSelect}
+                    isDark={isDark}
+                ></CreateNoteForm>
+            </section>
+        </div>
     );
 };
 

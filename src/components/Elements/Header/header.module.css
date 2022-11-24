@@ -1,10 +1,17 @@
 .header {
     flex-direction: row;
     justify-content: flex-start !important;
-    background: #212121;
-    box-shadow: 0px 21px 9px rgb(0 0 0 / 22%);
+    /*background: #212121;*/
+    box-shadow: 0px 10px 12px rgb(0 0 0 / 20%);
     height: 72px;
     width: 100%;
+    position: fixed;
+}
+.headerDark {
+    background: rgba(33, 33, 33, 0.9);
+}
+.headerLight {
+    background: rgba(33, 33, 33, 0.2);
 }
 .logoDiv {
     width: 55%;
@@ -12,13 +19,32 @@
     border-right: 1px solid #858bb2;
 }
 .logoFigure {
+    overflow: hidden;
     width: 72px;
     height: 72px;
     background: #3d3d3d;
-    padding: 18px 0 0 18px;
+    padding: 22px 0 0 5px;
     border-radius: 0 20px 20px 0;
+    color: #59942b;
+    font-size: 20px;
+    font-weight: 700;
+}
+.logoFigureP {
+    text-shadow: 1px -3px 0 #59942b;
+}
+
+.logoFigureLight {
+    background: #909296 !important;
 }
 .logoFigure:hover {
+    cursor: pointer;
+}
+
+.svgSunButton {
+    background: transparent;
+    border: transparent;
+}
+.svgSunButton:hover {
     cursor: pointer;
 }
 .logoDiv img {
@@ -49,6 +75,12 @@
 .rotateSvg:hover {
     cursor: pointer;
 }
+.rotateSvgLight {
+    background: #909296 !important;
+}
+.rotateSvgDark {
+    background: #484a4d;
+}
 .rotateSvg svg {
     fill: #dadce1;
     transition: 0.5s;
@@ -62,11 +94,13 @@
 @media screen and (min-width: 1144px) {
     .header {
         align-items: stretch;
-        position: absolute;
+        box-shadow: 10px -5px 9px rgb(0 0 0 / 22%);
+        position: fixed;
         left: 0;
         top: 0;
         height: 100%;
         width: 72px;
+        border-top-right-radius: 30px;
     }
     .logoDiv {
         height: 75vh;
@@ -82,8 +116,7 @@
         width: 72px;
         height: 72px;
         background: #3d3d3d;
-        padding: 18px 0 0 18px;
-
+        padding: 22px 0 0 5px;
         border-radius: 0 20px 20px 0;
     }
     .svgSunDiv {

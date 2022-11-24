@@ -1,7 +1,7 @@
 .projectInfo {
     max-width: 90%;
     margin: 0 auto 40px auto;
-    padding: 40px 0 0 0;
+    padding: 100px 0 0 0;
 }
 .projectInfoForm {
     width: 100%;
@@ -90,5 +90,10 @@
     .projectMembersDiv input {
         max-width: 60%;
         margin-left: 217px;
+    }
+}
+@media screen and (min-width: 1144px) {
+    .projectInfo {
+        padding: 50px 0 0 0;
     }
 }

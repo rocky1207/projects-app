@@ -1,55 +1,97 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import DropDownMenu from './DropDownMenu/DropDownMenu';
-import logo from '../../../assets/icons/logo-services.png';
+
 import SvgRotate from '../../iconComponents/SvgRotate';
-import SvgSun from '../../iconComponents/SvgSun';
+import SvgSun from '../SvgIcons/SvgSun';
 import defaultAvatar from '../../../assets/icons/defaultAvatad.jpg';
 import { useNavigate } from 'react-router-dom';
+import { themeMode } from '../../../features/theme/themeSlice';
 
 import styles from './header.module.css';
 
 const Header = () => {
-    const author = useSelector((state) => state.projects.avatar);
-    console.log(author);
+    const role = useSelector((state) => state.role.role);
+    const themeModeState = useSelector((state) => state.theme.isDark);
+
+    const authorAvatarPath = useSelector((state) => state.projects.avatar);
+    const userAvatarPath = useSelector(
+        (state) => state.employeeAvatar.employeeAvatarPath
+    );
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [showDropMenu, setShowDropMenu] = useState(false);
+    const [isDark, setIsDark] = useState(themeModeState);
 
     const api_url = 'http://localhost:1337';
+    let avatar = '';
+
+    if (role !== 'ProjectManager') {
+        avatar = userAvatarPath;
+    } else {
+        avatar = authorAvatarPath;
+    }
+
+    useEffect(() => {
+        dispatch(themeMode(isDark));
+    }, [isDark]);
 
     return (
-        <div className={`flex ${styles.header}`}>
+        <div
+            className={
+                isDark
+                    ? `flex ${styles.header} ${styles.headerDark}`
+                    : `flex ${styles.header} ${styles.headerLight}`
+            }
+        >
             <div className={`flex ${styles.logoDiv}`}>
-                <figure
-                    className={styles.logoFigure}
+                <div
+                    className={
+                        themeModeState
+                            ? `${styles.logoFigure}`
+                            : `${styles.logoFigure} ${styles.logoFigureLight}`
+                    }
                     onClick={() => {
                         navigate('/');
                     }}
                 >
-                    <img src={logo} alt="Logo" />
-                </figure>
+                    <p className={styles.logoFigureP}>LOGO</p>
+                </div>
                 <div className={styles.svgSunDiv}>
-                    <SvgSun />
+                    <button
+                        className={styles.svgSunButton}
+                        onClick={() => setIsDark((prev) => !prev)}
+                    >
+                        <SvgSun fill={isDark ? '#858BB2' : '#000'} />
+                    </button>
                 </div>
             </div>
             <div className={`flex ${styles.authorDiv}`}>
                 <figure className={styles.authorFigure}>
                     <img
-                        src={author ? `${api_url}${author}` : defaultAvatar}
+                        src={avatar ? `${api_url}${avatar}` : defaultAvatar}
                         alt="Author"
                     />
                 </figure>
                 <div
                     className={
-                        showDropMenu
-                            ? `${styles.rotateSvg} ${styles.rotateSvgRotate}`
-                            : `${styles.rotateSvg}`
+                        isDark
+                            ? showDropMenu
+                                ? `${styles.rotateSvg} ${styles.rotateSvgRotate}  ${styles.rotateSvgDark}`
+                                : `${styles.rotateSvg} ${styles.rotateSvgDark}`
+                            : !isDark
+                            ? showDropMenu
+                                ? `${styles.rotateSvg} ${styles.rotateSvgRotate}  ${styles.rotateSvgLight}`
+                                : `${styles.rotateSvg} ${styles.rotateSvgLight}`
+                            : null
                     }
                     onClick={() => setShowDropMenu((prev) => !prev)}
                 >
                     <SvgRotate width={20} height={20} />
                 </div>
-                {showDropMenu ? <DropDownMenu /> : null}
+                {showDropMenu ? (
+                    <DropDownMenu avatar={avatar} isDark={isDark} />
+                ) : null}
             </div>
         </div>
     );

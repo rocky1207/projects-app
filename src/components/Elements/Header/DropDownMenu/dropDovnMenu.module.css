@@ -3,7 +3,7 @@
     top: 58px;
     left: -100px;
     width: 200px;
-    background-color: var(--bg);
+    /* background-color: var(--bg);*/
     border: var(--border);
     border-radius: var(--border-radius);
     padding: 1rem;
@@ -12,6 +12,15 @@
     opacity: 0.9;
     animation: mymove 0.5s forwards;
 }
+.dropDownMenuBgDark {
+    background-color: var(--bg);
+    color: var(--white);
+}
+.dropDownMenuBgLight {
+    background-color: #909296;
+    color: var(--black);
+}
+
 @keyframes mymove {
     0% {
         top: 0px;

@@ -7,11 +7,12 @@
 body {
     font-family: 'Roboto', sans-serif;
     font-style: normal;
-    color: white;
-    min-height: 100vh;
-    background: rgba(30, 30, 30, 0.9);
+    /* color: white;*/
+    /*  min-height: 100vh;*/
+    /*background: rgba(30, 30, 30, 0.9);*/
     position: relative;
 }
+
 .app {
     padding: 0 0 100px 0;
 }

@@ -10,6 +10,7 @@ import PaginationInputField from './PaginationInputField';
 
 const Pagination = () => {
     const { maxPageNumber, pageNumber } = useSelector((state) => state.search);
+    const { isDark } = useSelector((state) => state.theme);
     const dispatch = useDispatch();
     const [page, setPage] = useState(maxPageNumber + 1 - maxPageNumber);
 
@@ -18,7 +19,11 @@ const Pagination = () => {
     }, [pageNumber]);
     const leftDoubleButton = {
         value: '<<',
-        elClassName: 'paginationButton',
+        elClassName: isDark
+            ? 'paginationButton  paginationButtonColorDark'
+            : !isDark
+            ? 'paginationButton paginationButtonColorLight'
+            : null,
         type: 'button',
         disabled: pageNumber <= 1 ? true : false,
 
@@ -31,7 +36,11 @@ const Pagination = () => {
     const leftButton = {
         value: '<',
         elClassName: 'paginationButton',
-        additionalElClassName: 'arrowButton',
+        additionalElClassName: isDark
+            ? 'arrowButton paginationButtonColorDark'
+            : !isDark
+            ? 'arrowButton paginationButtonColorLight'
+            : null,
         type: 'button',
         disabled: pageNumber <= 1 ? true : false,
         action: () => {
@@ -42,7 +51,11 @@ const Pagination = () => {
     const rightButton = {
         value: '>',
         elClassName: 'paginationButton',
-        additionalElClassName: 'arrowButton',
+        additionalElClassName: isDark
+            ? 'arrowButton paginationButtonColorDark'
+            : !isDark
+            ? 'arrowButton paginationButtonColorLight'
+            : null,
         type: 'button',
         disabled: pageNumber >= maxPageNumber ? true : false,
         action: (e) => {
@@ -52,7 +65,11 @@ const Pagination = () => {
     };
     const rightDoubleButton = {
         value: '>>',
-        elClassName: 'paginationButton',
+        elClassName: isDark
+            ? 'paginationButton  paginationButtonColorDark'
+            : !isDark
+            ? 'paginationButton paginationButtonColorLight'
+            : null,
         type: 'button',
         disabled: pageNumber >= maxPageNumber ? true : false,
         action: () => {
@@ -62,7 +79,11 @@ const Pagination = () => {
     };
 
     const numberButton = {
-        elClassName: 'paginationButton',
+        elClassName: isDark
+            ? 'paginationButton  paginationButtonColorDark'
+            : !isDark
+            ? 'paginationButton paginationButtonColorLight'
+            : null,
         type: 'button',
 
         action: (e) => {

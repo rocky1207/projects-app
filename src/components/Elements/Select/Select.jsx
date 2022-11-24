@@ -7,6 +7,7 @@ const Select = ({ props }) => {
     const value = props.value;
     const action = props.action;
     const selectedOption = props.selectedOption;
+    console.log(optionClassName);
 
     return (
         <>

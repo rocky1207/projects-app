@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
+
 import { useGetCategoriesQuery } from '../../api/categories/categoriesApiSlice';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { categoryInfo } from '../../features/categories/categoriesSlice';
 
@@ -11,6 +12,7 @@ import searchButton from '../../assets/icons/search.png';
 import styles from './searchProjectNote.module.css';
 
 const Categories = ({ criteria, setCriteria, role }) => {
+    const { isDark } = useSelector((state) => state.theme);
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [categories, setCategories] = useState([]);
@@ -18,7 +20,7 @@ const Categories = ({ criteria, setCriteria, role }) => {
         categorieId: 1,
         categorieName: 'Project Managment',
     });
-
+    console.log(isDark);
     const [buttonProps, setButtonProps] = useState({
         value: 'Add Note',
         elClassName: 'button',
@@ -55,8 +57,10 @@ const Categories = ({ criteria, setCriteria, role }) => {
                         return (
                             <li
                                 className={
-                                    select === categorie.id
-                                        ? `${styles.liMarked}`
+                                    isDark && select === categorie.id
+                                        ? `${styles.liMarkedDark} ${styles.liDark}`
+                                        : !isDark && select === categorie.id
+                                        ? `${styles.liMarkedLight} ${styles.liLight}`
                                         : null
                                 }
                                 key={categorie.id}
@@ -68,7 +72,15 @@ const Categories = ({ criteria, setCriteria, role }) => {
                                     });
                                 }}
                             >
-                                {categorie.attributes.name}
+                                <span
+                                    className={
+                                        isDark
+                                            ? `${styles.liDark}`
+                                            : `${styles.liLight}`
+                                    }
+                                >
+                                    {categorie.attributes.name}
+                                </span>
                             </li>
                         );
                     })}

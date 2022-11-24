@@ -1,6 +1,6 @@
 .createNoteArticle {
     margin: 0 20px;
-    padding: 40px 0;
+    padding: 100px 0;
 }
 .createNoteForm {
     margin: 0 20px;
@@ -67,6 +67,7 @@ Notes
     margin: 40px 0;
     align-items: flex-start;
     flex-direction: column;
+    padding: 0 0 0 20px;
 }
 .noteArticle {
     width: 280px;
@@ -187,5 +188,11 @@ Notes
     }
     .avatarEmail .avatarUsername {
         font-size: 14px;
+    }
+}
+
+@media screen and (min-width: 1144px) {
+    .createNoteArticle {
+        padding: 40px 0;
     }
 }

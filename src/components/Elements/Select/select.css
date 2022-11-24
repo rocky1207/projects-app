@@ -5,7 +5,12 @@
     padding: 10px;
 
     outline: none;
+    margin-bottom: 20px;
 }
-.categoryOption {
+
+.categoryOptionDark {
     background-color: rgb(50, 50, 50);
+}
+.categoryOptionLight {
+    background-color: rgba(50, 50, 50, 0.4);
 }

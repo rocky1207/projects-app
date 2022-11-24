@@ -16,11 +16,14 @@ import { useGetCategoriesQuery } from '../../api/categories/categoriesApiSlice';
 
 import '../../App.css';
 import styles from '../CreateNote/createNote.module.css';
+import themeStyles from '../../theme.module.css';
+
 const EditNote = () => {
     const navigate = useNavigate();
     const params = useParams();
     const { currentUserId } = useSelector((state) => state.auth);
     const { projectInfo } = useSelector((state) => state.projects);
+    const { isDark } = useSelector((state) => state.theme);
 
     const dispatch = useDispatch();
     const [categoriesDataState, setCategoriesDataState] = useState([]);
@@ -149,28 +152,33 @@ const EditNote = () => {
     };
 
     return (
-        <section className="app">
-            <article className={`flex ${styles.createNoteArticle}`}>
-                <div className={`flex ${styles.searchProjectsHeadDiv}`}>
-                    <img src={doc} alt="document" />
-                    <div className={styles.searchProjectsArticleHead}>
-                        <h2>Create a Note</h2>
-                        <p>Here you can create a new note</p>
+        <div
+            className={isDark ? `${themeStyles.dark}` : `${themeStyles.light}`}
+        >
+            <section className="app">
+                <article className={`flex ${styles.createNoteArticle}`}>
+                    <div className={`flex ${styles.searchProjectsHeadDiv}`}>
+                        <img src={doc} alt="document" />
+                        <div className={styles.searchProjectsArticleHead}>
+                            <h2>Create a Note</h2>
+                            <p>Here you can create a new note</p>
+                        </div>
                     </div>
-                </div>
 
-                <Button props={buttonProps}></Button>
-            </article>
-            <EditNoteForm
-                setNote={setNote}
-                note={note}
-                select={select}
-                categoriesDataState={categoriesDataState}
-                selectProps={selectProps}
-                setSelectProps={setSelectProps}
-                selectChangeFunc={selectChangeFunc}
-            ></EditNoteForm>
-        </section>
+                    <Button props={buttonProps}></Button>
+                </article>
+                <EditNoteForm
+                    setNote={setNote}
+                    note={note}
+                    select={select}
+                    categoriesDataState={categoriesDataState}
+                    selectProps={selectProps}
+                    setSelectProps={setSelectProps}
+                    selectChangeFunc={selectChangeFunc}
+                    isDark={isDark}
+                ></EditNoteForm>
+            </section>
+        </div>
     );
 };
 
